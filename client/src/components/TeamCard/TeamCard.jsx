@@ -7,6 +7,7 @@ import './TeamCard.css';
 // the handleRatingUpdate will need to check the following:
 // whether or not the user is logged in, whether or not the user is the creator of the team, and whether or not they've rated this team before.
 // if any of these are true, the rating WILL NOT be updated and the user should be notified
+// that function will probably live in the home page, since that's where the team cards will be rendered.
 function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator }) {
   return (
     <Card className="card">
