@@ -4,6 +4,9 @@ import './TeamCard.css';
 
 // these should be the names of the props we'll be using.
 // handleRatingUpdate will be the function needed to update the rating
+// the handleRatingUpdate will need to check the following:
+// whether or not the user is logged in, whether or not the user is the creator of the team, and whether or not they've rated this team before.
+// if any of these are true, the rating WILL NOT be updated and the user should be notified
 function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator }) {
   return (
     <Card className="card">
