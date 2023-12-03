@@ -1,0 +1,31 @@
+.card {
+    width: 200px;
+    border-color: var(--red);
+    border-radius: 10px;
+  }
+  
+  .top-element {
+    background-color: var(--red);
+    height: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 10px solid var(--red);
+  }
+  
+  .middle-element {
+    background-color: transparent;
+    height: 250px;
+    border: 10px solid var(--red);
+  }
+  
+  .bottom-element {
+    background-color: var(--red);
+    height: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 10px solid var(--red);
+  }
+
+  .team-row {
+    font-family: 'Roboto', sans-serif;
+  }
