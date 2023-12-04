@@ -9,17 +9,18 @@ const client = new ApolloClient({
 
 import './App.css'
 import './style.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+// uncomment these once components are created
+// import Header from './components/Header/Header';
+// import Footer from './components/Footer/Footer';
 
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <div className="flex-column justify-center align-center min-100-vh">
-        <Header />
+        {/* <Header /> */}
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </ApolloProvider>
   );
