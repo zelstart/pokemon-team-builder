@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { Container } from 'react-bootstrap';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -17,11 +18,11 @@ import './style.css';
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="flex-column justify-center align-center min-100-vh">
+      <Container fluid>
         {/* <Header /> */}
         <Outlet />
         {/* <Footer /> */}
-      </div>
+      </Container>
     </ApolloProvider>
   );
 }
