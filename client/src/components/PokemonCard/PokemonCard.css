@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-.nature, .ability, .moves {
+.nature, .ability, .moves, .stats, .iv-spread, .ev-spread {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: .8rem;
   letter-spacing: .05rem;
@@ -83,4 +83,16 @@
 
 .stats-chevron {
   font-size: .7rem;
+}
+
+.stat-bar {
+  height: 15px;
+  border-radius: 3px;
+  transition: width 0.5s ease-in-out;
+}
+
+.stat-line {
+  display: grid;
+  grid-template-columns: 30px 30px auto;
+  align-items: center;
 }
