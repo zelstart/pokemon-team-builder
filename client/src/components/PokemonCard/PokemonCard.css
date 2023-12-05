@@ -45,6 +45,13 @@
   cursor: pointer;
 } 
 
+.poke-icon {
+  height: auto;
+  width: 60px;
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+
 .types {
   padding: 0;
   margin: 0;
