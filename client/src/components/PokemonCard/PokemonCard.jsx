@@ -110,7 +110,7 @@ function PokemonCard() {
                         </Row>
 
                         {/* CARD MIDDLE // STATS */}
-                        {/* This will eventually be condensed into a map function for each stat instead of making a new row for each stat.*/}
+                        {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
                         <Row className='stat-table'>
                             <div className='d-flex'>
                                 <Col className='rc-400-bold'>Stat</Col>
