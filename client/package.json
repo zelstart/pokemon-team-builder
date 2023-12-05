@@ -12,7 +12,9 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2",
+    "@apollo/client": "^3.7.14"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
