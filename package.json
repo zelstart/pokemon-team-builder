@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "node server/server.js",
-    "start": "concurrently \"npm run server\" \"npm --prefix client run dev\"",
+    "start": "node server/server.js",
     "build": "npm --prefix client run build",
     "dev": "npm --prefix client run dev",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
