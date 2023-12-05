@@ -30,20 +30,13 @@
   cursor: default;
 }
 
-.poke-move {
+.rc-400 {
   font-family: 'Roboto Condensed', sans-serif;  
   font-weight: 400;
   letter-spacing: .03rem;
   font-size: .8rem;
   cursor: pointer;
 }
-
-.nature, .ability, .moves, .stats, .iv-spread, .ev-spread {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: .8rem;
-  letter-spacing: .05rem;
-  cursor: pointer;
-} 
 
 .poke-icon {
   height: auto;
@@ -67,9 +60,13 @@
   margin-bottom: 3px;
 }
 
-.bold {
-  font-weight: 600;
+.rc-400-bold {
   cursor: default;
+  font-family: 'Roboto Condensed', sans-serif;  
+  font-weight: 400;
+  letter-spacing: .03rem;
+  font-size: .8rem;
+  font-weight: 600;
 }
 
 .stat-button {
