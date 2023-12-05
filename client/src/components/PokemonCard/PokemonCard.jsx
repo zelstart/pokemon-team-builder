@@ -63,7 +63,7 @@ function PokemonCard() {
         <div>
             {isFlipped ? (
                 // CARD BACK // STATS
-                <Row className='justify-content-center'>
+                <Row className='justify-content-center no-select'>
                     <Col lg={3} md={6} sm={12} className='poke-card m-1'>
                         {/* CARD TOP // NAME + LEVEL */}
                         <Row className='card-top justify-content-center'>
@@ -72,6 +72,9 @@ function PokemonCard() {
                             </Col>
                             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
                                 <p className='poke-level'>lv. 50</p>
+                            </Col>
+                            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                                <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
                             </Col>
                         </Row>
 
@@ -158,7 +161,7 @@ function PokemonCard() {
                 </Row>
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
-                <Row className='justify-content-center'>
+                <Row className='justify-content-center no-select'>
                     <Col lg={3} md={6} sm={12} className='poke-card m-1'>
                         {/* CARD TOP // NAME + LEVEL */}
                         <Row className='card-top justify-content-center'>
@@ -169,7 +172,7 @@ function PokemonCard() {
                                 <p className='poke-level'>lv. 50</p>
                             </Col>
                             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                                <div className='stat-button' onClick={handleFlip}>stats <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+                                <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
                             </Col>
                         </Row>
                         {/* CARD MIDDLE // MOVESET + SPRITE */}
@@ -207,8 +210,6 @@ function PokemonCard() {
                             </Col>
 
                         </Row>
-
-                        <div className='stat-button' onClick={handleFlip}>stats <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
                     </Col>
                 </Row>
             )}
