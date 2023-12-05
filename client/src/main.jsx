@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
-import Test from './components/z_pages/TestPage/Test.jsx';
+import Test from './components/z_pages/TestPage/PokemonCard.jsx';
 // uncomment these as components/pages are created
 // import Home from '.components/z_pages/Home.jsx';
 // import CreateTeam from './components/z_pages/CreateTeam.jsx';
