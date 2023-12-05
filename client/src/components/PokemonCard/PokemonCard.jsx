@@ -4,6 +4,7 @@ import '../../../style.css';
 import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Grass from '../../../assets/images/grass.png';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 
@@ -205,8 +206,8 @@ function PokemonCard() {
                             </Col>
 
                             <Col lg={6} className='types d-flex flex-column'>
-                                <img className='type-icon' src='https://archives.bulbagarden.net/media/upload/thumb/7/7b/GrassIC_SV.png/105px-GrassIC_SV.png' alt='grass' />
-                                <img className='type-icon' src='https://archives.bulbagarden.net/media/upload/thumb/7/7b/GrassIC_SV.png/105px-GrassIC_SV.png' alt='grass' />
+                                <img className='type-icon' src={Grass} alt='grass' />
+                                <img className='type-icon' src={Grass} alt='grass' />
                             </Col>
 
                         </Row>
