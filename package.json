@@ -7,7 +7,10 @@
     "server": "node server/server.js",
     "start": "concurrently \"npm run server\" \"npm --prefix client run dev\"",
     "build": "npm --prefix client run build",
-    "dev": "npm --prefix client run dev"
+    "dev": "npm --prefix client run dev",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "render-build":"npm install && npm run build"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
