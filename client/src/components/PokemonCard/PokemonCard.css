@@ -109,15 +109,10 @@
 }
 
 .stat-bar {
+  display: inline-block;
   height: 15px;
   border-radius: 3px;
   transition: width 0.5s ease-in-out;
-}
-
-.stat-line {
-  display: grid;
-  grid-template-columns: 30px 30px auto;
-  align-items: center;
 }
 
 /* rapid fire clicking of elements on the page won't trigger highlight 
