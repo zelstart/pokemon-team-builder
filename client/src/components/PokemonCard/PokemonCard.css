@@ -4,6 +4,9 @@
   border-radius: 10px;
   padding: 0px 15px;
   position: relative;
+  min-height: 200px; 
+  max-height: 500px; 
+  overflow: auto;
 }
 
 .poke-card p {
