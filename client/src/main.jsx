@@ -6,7 +6,7 @@ import App from './App.jsx';
 import Test from './components/z_pages/TestPage/PokemonCard.jsx';
 // uncomment these as components/pages are created
 // import Home from '.components/z_pages/Home.jsx';
-// import CreateTeam from './components/z_pages/CreateTeam.jsx';
+import CreateTeam from './components/z_pages/CreateTeam/CreateTeam.jsx';
 // import Me from './components/z_pages/Me.jsx';
 // import Profile from './components/z_pages/Profile.jsx';
 // import TeamView from './components/z_pages/TeamView.jsx';
@@ -30,10 +30,12 @@ const router = createBrowserRouter([
       // }, {
       //   path: '/profile/:id',
       //   element: <Profile />
-      // }, {
-      //   path: '/create-team',
-      //   element: <CreateTeam />
-      // }, {
+      // }, 
+      {
+        path: '/create-team',
+        element: <CreateTeam />
+      }, 
+      // {
       //   path: '/team/:id',
       //   element: <TeamView />
       // }, {
