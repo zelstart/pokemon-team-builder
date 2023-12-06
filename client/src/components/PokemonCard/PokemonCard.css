@@ -9,6 +9,11 @@
   overflow: auto;
 }
 
+.edit-save {
+  color: var(--red);
+  cursor: pointer;
+}
+
 .poke-card p {
   margin: 0;
 }
