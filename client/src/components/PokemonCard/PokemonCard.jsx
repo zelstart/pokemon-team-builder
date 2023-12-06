@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
-import '../../../style.css';
+import '../../style.css';
 import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Grass from '../../../assets/images/grass.png';
+import Grass from '../../assets/images/grass.png';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 // what needs to be done: 
