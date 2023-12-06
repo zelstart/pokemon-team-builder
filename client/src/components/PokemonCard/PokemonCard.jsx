@@ -100,11 +100,10 @@ function PokemonCard() {
     // icon, and when you click it, it turns into a form field. then when you click out of it, it turns back into text
     // and saves the value to the database. 
     return (
-        <div>
+        <div className='poke-card m-1'>
             {isFlipped ? (
                 // CARD BACK // STATS
                 <Row className='justify-content-center no-select'>
-                    <Col lg={3} md={6} sm={12} className='poke-card m-1'>
                         {/* CARD TOP // NAME + LEVEL */}
                         <Row className='card-top justify-content-center'>
                             <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
@@ -132,12 +131,11 @@ function PokemonCard() {
                         {stats.map((stat) => (
                             <StatRow key={stat.name} statName={stat.name} baseStat={stat.base} iv={stat.iv} ev={stat.ev} />
                         ))}
-                    </Col>
+
                 </Row>
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
                 <Row className='justify-content-center no-select'>
-                    <Col lg={3} md={6} sm={12} className='poke-card m-1'>
                         {/* CARD TOP // NAME + LEVEL */}
                         <Row className='card-top justify-content-center'>
                             <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
@@ -185,7 +183,6 @@ function PokemonCard() {
                             </Col>
 
                         </Row>
-                    </Col>
                 </Row>
             )}
         </div>
