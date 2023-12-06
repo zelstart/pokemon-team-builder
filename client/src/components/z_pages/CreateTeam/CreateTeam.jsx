@@ -8,7 +8,7 @@ const CreateTeam = () => {
     const secondRow = team.slice(3, 6);
 
     return (
-        <Container>
+        <Container className='mt-2'>
             <Row>
                 {firstRow.map((pokemon, index) => (
                     <Col lg={4} key={index} className='mb-4'>
