@@ -13,11 +13,7 @@
   margin: 0;
 }
 
-.card-top,
-.card-middle,
-.card-bottom {
-  margin-bottom: 10px;
-}
+
 
 .poke-name {
   font-family: 'Roboto', sans-serif;
