@@ -5,7 +5,8 @@ import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
-import typesIcons from '../../assets/data/types'
+import typesIcons from '../../assets/data/types';
+import natures from '../../assets/data/natures';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 // what needs to be done: 
@@ -18,7 +19,7 @@ import typesIcons from '../../assets/data/types'
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, moves = [], sprite = SpritePlaceholder, nature = "--", types = ['unknown', 'unknown'] }) {
+function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleFlip = () => {
@@ -30,9 +31,9 @@ function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, mo
 
     // TEMPORARY DATA
     const pokemonLevel = level; // Placeholder for Pokemon's level
-    const [baseStats, setBaseStats] = useState(stats.base || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
-    const [ivStats, setIvStats] = useState(stats.iv || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
-    const [evStats, setEvStats] = useState(stats.ev || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
+    const [baseStats, setBaseStats] = useState(stats.base || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [ivStats, setIvStats] = useState(stats.iv || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [evStats, setEvStats] = useState(stats.ev || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
 
 
     const statsArray = [
@@ -52,6 +53,18 @@ function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, mo
         } else {
             totalStat = ((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * pokemonLevel / 100) + 5;
         }
+    
+        // adjust the stat based on the nature
+        const natureEffect = natures[nature];
+        if (natureEffect) {
+            if (natureEffect.increase === stat) {
+                totalStat *= 1.1;
+            }
+            if (natureEffect.decrease === stat) {
+                totalStat *= 0.9;
+            }
+        }
+    
         return Math.round(totalStat);
     };
 
@@ -147,14 +160,14 @@ function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, mo
                             <Row>
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index}>
-                                        <p className='rc-400'>{moves[index] || "--"}</p>
+                                        <p className='rc-400'>{moves[index] || '--'}</p>
                                     </Col>
                                 ))}
                             </Row>
                             <Row>
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index + 2}>
-                                        <p className='rc-400'>{moves[index + 2] || "--"}</p>
+                                        <p className='rc-400'>{moves[index + 2] || '--'}</p>
                                     </Col>
                                 ))}
                             </Row>
@@ -167,8 +180,8 @@ function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, mo
                     {/* CARD BOTTOM // ABILITY + NATURE */}
                     <Row className='card-bottom'>
                         <Col lg={6} sm={6}>
-                            <p><span className="rc-400-bold">ability: </span><span className='rc-400'>{ability}</span></p>
-                            <p><span className="rc-400-bold">nature: </span><span className='rc-400'>{nature}</span></p>
+                            <p><span className='rc-400-bold'>ability: </span><span className='rc-400'>{ability}</span></p>
+                            <p><span className='rc-400-bold'>nature: </span><span className='rc-400'>{nature}</span></p>
                         </Col>
 
                         <Col lg={6} sm={6} className='types d-flex flex-column'>
