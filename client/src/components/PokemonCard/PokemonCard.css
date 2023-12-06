@@ -41,6 +41,7 @@
 .poke-icon {
   height: auto;
   width: 60px;
+  max-width: 70px;
   margin-top: 2px;
   margin-bottom: 3px;
 }

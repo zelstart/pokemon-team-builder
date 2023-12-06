@@ -4,7 +4,7 @@ import '../../style.css';
 import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Grass from '../../assets/images/grass.png';
+import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 // what needs to be done: 
@@ -17,28 +17,24 @@ import Grass from '../../assets/images/grass.png';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard() {
+function PokemonCard({ name = "--", level = "--", ability = "--", stats = {}, moves = [], sprite = SpritePlaceholder, nature = "--", types = [] }) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
-    
+
     const MAX_HP_STAT_VALUE = 720;
     const MAX_OTHER_STAT_VALUE = 250;
-    
+
     // TEMPORARY DATA
-    const pokemonLevel = 50; // Placeholder for Pokemon's level
-    const [baseStats, setBaseStats] = useState({ hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45 });
-    const [ivStats, setIvStats] = useState({ hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 });
-    const [evStats, setEvStats] = useState({ hp: 252, atk: 0, def: 0, spa: 252, spd: 0, spe: 4 });
-
-    // const [baseStats, setBaseStats] = useState(baseStatsProp);
-    // const [ivStats, setIvStats] = useState(ivStatsProp);
-    // const [evStats, setEvStats] = useState(evStatsProp);
+    const pokemonLevel = level; // Placeholder for Pokemon's level
+    const [baseStats, setBaseStats] = useState(stats.base || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
+    const [ivStats, setIvStats] = useState(stats.iv || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
+    const [evStats, setEvStats] = useState(stats.ev || { hp: "--", atk: "--", def: "--", spa: "--", spd: "--", spe: "--" });
 
 
-    const stats = [
+    const statsArray = [
         { name: 'HP', base: baseStats.hp, iv: ivStats.hp, ev: evStats.hp },
         { name: 'Atk', base: baseStats.atk, iv: ivStats.atk, ev: evStats.atk },
         { name: 'Def', base: baseStats.def, iv: ivStats.def, ev: evStats.def },
@@ -46,13 +42,6 @@ function PokemonCard() {
         { name: 'SpD', base: baseStats.spd, iv: ivStats.spd, ev: evStats.spd },
         { name: 'Spe', base: baseStats.spe, iv: ivStats.spe, ev: evStats.spe },
     ];
-
-    // will need to pass in props for baseStats, ivStats, evStats
-    // useEffect(() => {
-    //     setBaseStats(baseStatsProp);
-    //     setIvStats(ivStatsProp);
-    //     setEvStats(evStatsProp);
-    // }, [baseStatsProp, ivStatsProp, evStatsProp]);
 
     // calculate the stats for the pokemon
     const calculateTotalStats = (stat) => {
@@ -104,85 +93,89 @@ function PokemonCard() {
             {isFlipped ? (
                 // CARD BACK // STATS
                 <Row className='justify-content-center no-select'>
-                        {/* CARD TOP // NAME + LEVEL */}
-                        <Row className='card-top justify-content-center'>
-                            <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                                <p className='poke-name'>bulbasaur</p>
-                            </Col>
-                            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                                <p className='poke-level'>lv. 50</p>
-                            </Col>
-                            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                                <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                            </Col>
-                        </Row>
+                    {/* CARD TOP // NAME + LEVEL */}
+                    <Row className='card-top justify-content-center'>
+                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
+                            <p className='poke-name'>{name}</p>
+                        </Col>
+                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                            <p className='poke-level'>lv. {level}</p>
+                        </Col>
+                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+                        </Col>
+                    </Row>
 
-                        {/* CARD MIDDLE // STATS */}
-                        {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
-                        <Row className='stat-table'>
-                            <div className='d-flex'>
-                                <Col className='rc-400-bold'>Stat</Col>
-                                <Col className='rc-400-bold'>Base</Col>
-                                <Col className='rc-400-bold'>IV</Col>
-                                <Col className='rc-400-bold'>EV</Col>
-                                <Col></Col>
-                            </div>
-                        </Row>
-                        {stats.map((stat) => (
-                            <StatRow key={stat.name} statName={stat.name} baseStat={stat.base} iv={stat.iv} ev={stat.ev} />
-                        ))}
+                    {/* CARD MIDDLE // STATS */}
+                    {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
+                    <Row className='stat-table'>
+                        <div className='d-flex'>
+                            <Col className='rc-400-bold'>Stat</Col>
+                            <Col className='rc-400-bold'>Base</Col>
+                            <Col className='rc-400-bold'>IV</Col>
+                            <Col className='rc-400-bold'>EV</Col>
+                            <Col></Col>
+                        </div>
+                    </Row>
+                    {statsArray.map((stat) => (
+                        <StatRow key={stat.name} statName={stat.name} baseStat={stat.base} iv={stat.iv} ev={stat.ev} />
+                    ))}
 
                 </Row>
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
                 <Row className='justify-content-center no-select'>
-                        {/* CARD TOP // NAME + LEVEL */}
-                        <Row className='card-top justify-content-center'>
-                            <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                                <p className='poke-name'>bulbasaur</p>
-                            </Col>
-                            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                                <p className='poke-level'>lv. 50</p>
-                            </Col>
-                            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                                <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                            </Col>
-                        </Row>
-                        {/* CARD MIDDLE // MOVESET + SPRITE */}
-                        <Row className='card-middle'>
-                            <Col lg={12}>
-                                <p className='rc-400 rc-400-bold'>moveset</p>
-                            </Col>
-                            <Col lg={4} md={4} sm={4}>
-                                <Row>
-                                    <p className='rc-400'>vine whip</p>
-                                    <p className='rc-400'>leer</p>
-                                </Row>
-                            </Col>
-                            <Col lg={4} md={4} sm={4}>
-                                <Row>
-                                    <p className='rc-400'>razor leaf</p>
-                                    <p className='rc-400'>growl</p>
-                                </Row>
-                            </Col>
-                            <Col lg={4}>
-                                <img className='poke-icon' src='https://img.pokemondb.net/sprites/sword-shield/icon/bulbasaur.png' alt='bulbasaur' />
-                            </Col>
-                        </Row>
+                    {/* CARD TOP // NAME + LEVEL */}
+                    <Row className='card-top justify-content-center'>
+                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
+                            <p className='poke-name'>{name}</p>
+                        </Col>
+                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                            <p className='poke-level'>lv. {level}</p>
+                        </Col>
+                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+                        </Col>
+                    </Row>
+                    {/* CARD MIDDLE // MOVESET + SPRITE */}
+                    <Row className='card-middle'>
+                        <Col lg={12}>
+                            <p className='rc-400 rc-400-bold'>moveset</p>
+                        </Col>
+                        <Col lg={8} md={8} sm={8}>
+                            <Row>
+                                {[...Array(2)].map((_, index) => (
+                                    <Col lg={6} md={6} sm={6} key={index}>
+                                        <p className='rc-400'>{moves[index] || "--"}</p>
+                                    </Col>
+                                ))}
+                            </Row>
+                            <Row>
+                                {[...Array(2)].map((_, index) => (
+                                    <Col lg={6} md={6} sm={6} key={index + 2}>
+                                        <p className='rc-400'>{moves[index + 2] || "--"}</p>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </Col>
+                        <Col lg={4}>
+                            <img className='poke-icon' src={sprite} alt={name} />
+                        </Col>
+                    </Row>
 
-                        {/* CARD BOTTOM // ABILITY + NATURE */}
-                        <Row className='card-bottom'>
-                            <Col lg={6}>
-                                <p><span className="rc-400-bold">ability: </span><span className='rc-400'>overgrow</span></p>
-                                <p><span className="rc-400-bold">nature: </span><span className='rc-400'>modest</span></p>
-                            </Col>
+                    {/* CARD BOTTOM // ABILITY + NATURE */}
+                    <Row className='card-bottom'>
+                        <Col lg={6}>
+                            <p><span className="rc-400-bold">ability: </span><span className='rc-400'>{ability}</span></p>
+                            <p><span className="rc-400-bold">nature: </span><span className='rc-400'>{nature}</span></p>
+                        </Col>
 
-                            <Col lg={6} className='types d-flex flex-column'>
-                                <img className='type-icon' src={Grass} alt='grass' />
-                                <img className='type-icon' src={Grass} alt='grass' />
-                            </Col>
+                        <Col lg={6} className='types d-flex flex-column'>
+                            <img className='type-icon' src={types} alt={types} />
+                            <img className='type-icon' src={types} alt={types} />
+                        </Col>
 
-                        </Row>
+                    </Row>
                 </Row>
             )}
         </div>
