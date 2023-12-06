@@ -4,12 +4,21 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const CreateTeam = () => {
     const team = new Array(6).fill(null);
+    const firstRow = team.slice(0, 3);
+    const secondRow = team.slice(3, 6);
 
     return (
         <Container>
             <Row>
-                {team.map((pokemon, index) => (
-                    <Col key={index}>
+                {firstRow.map((pokemon, index) => (
+                    <Col lg={4} key={index} className='mb-4'>
+                        <PokemonCard />
+                    </Col>
+                ))}
+            </Row>
+            <Row>
+                {secondRow.map((pokemon, index) => (
+                    <Col lg={4} key={index + 3} className='mb-4'>
                         <PokemonCard />
                     </Col>
                 ))}
