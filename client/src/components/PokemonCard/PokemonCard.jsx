@@ -29,13 +29,14 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
     const MAX_HP_STAT_VALUE = 720;
     const MAX_OTHER_STAT_VALUE = 250;
 
-    // TEMPORARY DATA
-    const pokemonLevel = level; // Placeholder for Pokemon's level
+
+    const pokemonLevel = level; 
+    // set the base stats, ivs, and evs to the values passed in as props, or to '--' if they are not passed in
     const [baseStats, setBaseStats] = useState(stats.base || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
     const [ivStats, setIvStats] = useState(stats.iv || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
     const [evStats, setEvStats] = useState(stats.ev || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
 
-
+    // create an array of objects for each stat
     const statsArray = [
         { name: 'HP', base: baseStats.hp, iv: ivStats.hp, ev: evStats.hp },
         { name: 'Atk', base: baseStats.atk, iv: ivStats.atk, ev: evStats.atk },
@@ -78,7 +79,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
         return `rgb(${red}, ${green}, 0)`;
     };
 
-
+    // creates a row for each stat
     const StatRow = ({ statName, baseStat, iv, ev }) => {
         const totalStat = calculateTotalStats(statName.toLowerCase());
         const width = totalStat / (statName === 'HP' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE) * 100;
