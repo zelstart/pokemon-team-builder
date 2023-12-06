@@ -7,6 +7,15 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Grass from '../../../assets/images/grass.png';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
+// what needs to be done: 
+// 1. Create a state for each editable field (pokemon name, sprite, moveset, ability, nature, IVs, EVs, level) which will be editable once the user clicks the pen icon.
+// 2. For the pokemon name, use an autocomplete input that fetches data from the PokeAPI as the user types.
+// 3. When a pokemon is selected, update the other fields (sprite, moveset, ability, base stats) based on the API response.
+// 4. For the sprite, add an onClick event that cycles through the available sprites.
+// 5. For the moveset and ability, use a dropdown that is populated with the available moves/abilities for the selected pokemon.
+// 6. For the nature, IVs, EVs, and level, use a simple input field with validation to ensure the entered values are within the allowed range.
+// 7. Add an onChange event to each input field that updates the corresponding state.
+// 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
 function PokemonCard() {
     const [isFlipped, setIsFlipped] = useState(false);
