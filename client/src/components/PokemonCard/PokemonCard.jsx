@@ -116,26 +116,29 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
     // i'm thinking the best/easiest way is going to be make each field on the card editable. maybe add a little edit
     // icon, and when you click it, it turns into a form field. then when you click out of it, it turns back into text
     // and saves the value to the database. 
+
+    const cardTop = (
+        <Row className='card-top justify-content-center'>
+          <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
+            <p className='poke-name'>{name}</p>
+          </Col>
+          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+            <p className='poke-level'>lv. {level}</p>
+          </Col>
+          <Col lg={1} className='d-flex align-items-center justify-content-start'>
+            <FontAwesomeIcon icon={isEditMode ? faFloppyDisk : faPenToSquare} onClick={handleEditClick} className='edit-save' />
+          </Col>
+          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+          </Col>
+        </Row>
+      );
+
     return (
-        <div className='poke-card m-1'>
-            {isFlipped ? (
-                // CARD BACK // STATS
+            <div className='poke-card m-1'>
+              {isFlipped ? (
                 <Row className='justify-content-center no-select'>
-                    {/* CARD TOP // NAME + LEVEL */}
-                    <Row className='card-top justify-content-center'>
-                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                            <p className='poke-name'>{name}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <p className='poke-level'>lv. {level}</p>
-                        </Col>
-                        <Col lg={1} className='d-flex align-items-center justify-content-start'>
-                            <FontAwesomeIcon icon={isEditMode ? faFloppyDisk : faPenToSquare} onClick={handleEditClick} className='edit-save' />
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                        </Col>
-                    </Row>
+                  {cardTop}
 
                     {/* CARD MIDDLE // STATS */}
                     {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
@@ -156,18 +159,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
                 <Row className='justify-content-center no-select'>
-                    {/* CARD TOP // NAME + LEVEL */}
-                    <Row className='card-top justify-content-center'>
-                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                            <p className='poke-name'>{name}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <p className='poke-level'>lv. {level}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                        </Col>
-                    </Row>
+                {cardTop}
                     {/* CARD MIDDLE // MOVESET + SPRITE */}
                     <Row className='card-middle'>
                         <Col lg={12}>
