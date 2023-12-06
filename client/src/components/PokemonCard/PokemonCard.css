@@ -97,13 +97,6 @@
   letter-spacing: .05rem;
 }
 
-.stat-button .stats-text {
-  opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  transition: opacity 0.3s, max-width 0.3s;
-}
-
 .stat-button:hover {
   width: 25px;
 }
@@ -115,7 +108,7 @@
 
 .stat-bar {
   display: inline-block;
-  height: 15px;
+  height: 10px;
   border-radius: 3px;
   transition: width 0.5s ease-in-out;
 }
