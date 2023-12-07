@@ -4,6 +4,8 @@ import '../../style.css';
 import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
@@ -21,6 +23,18 @@ import natures from '../../assets/data/natures';
 
 function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
     const [isFlipped, setIsFlipped] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [editName, setEditName] = useState(name);
+    const [editLevel, setEditLevel] = useState(level);
+    const [editAbility, setEditAbility] = useState(ability);
+    const [editNature, setEditNature] = useState(nature);
+    const [editMoves, setEditMoves] = useState(moves);
+    const [editSprite, setEditSprite] = useState(sprite);
+    const [editStats, setEditStats] = useState(stats);
+
+    const handleEditClick = () => {
+        setIsEditMode(!isEditMode);
+    };
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -29,8 +43,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
     const MAX_HP_STAT_VALUE = 720;
     const MAX_OTHER_STAT_VALUE = 250;
 
-
-    const pokemonLevel = level; 
+    const pokemonLevel = level;
     // set the base stats, ivs, and evs to the values passed in as props, or to '--' if they are not passed in
     const [baseStats, setBaseStats] = useState(stats.base || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
     const [ivStats, setIvStats] = useState(stats.iv || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
@@ -54,7 +67,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
         } else {
             totalStat = ((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * pokemonLevel / 100) + 5;
         }
-    
+
         // adjust the stat based on the nature
         const natureEffect = natures[nature];
         if (natureEffect) {
@@ -65,7 +78,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
                 totalStat *= 0.9;
             }
         }
-    
+
         return Math.round(totalStat);
     };
 
@@ -103,23 +116,29 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
     // i'm thinking the best/easiest way is going to be make each field on the card editable. maybe add a little edit
     // icon, and when you click it, it turns into a form field. then when you click out of it, it turns back into text
     // and saves the value to the database. 
+
+    const cardTop = (
+        <Row className='card-top justify-content-center'>
+          <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
+            <p className='poke-name'>{name}</p>
+          </Col>
+          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+            <p className='poke-level'>lv. {level}</p>
+          </Col>
+          <Col lg={1} className='d-flex align-items-center justify-content-start'>
+            <FontAwesomeIcon icon={isEditMode ? faFloppyDisk : faPenToSquare} onClick={handleEditClick} className='edit-save' />
+          </Col>
+          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+          </Col>
+        </Row>
+      );
+
     return (
-        <div className='poke-card m-1'>
-            {isFlipped ? (
-                // CARD BACK // STATS
+            <div className='poke-card m-1'>
+              {isFlipped ? (
                 <Row className='justify-content-center no-select'>
-                    {/* CARD TOP // NAME + LEVEL */}
-                    <Row className='card-top justify-content-center'>
-                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                            <p className='poke-name'>{name}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <p className='poke-level'>lv. {level}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                        </Col>
-                    </Row>
+                  {cardTop}
 
                     {/* CARD MIDDLE // STATS */}
                     {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
@@ -140,18 +159,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
                 <Row className='justify-content-center no-select'>
-                    {/* CARD TOP // NAME + LEVEL */}
-                    <Row className='card-top justify-content-center'>
-                        <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-                            <p className='poke-name'>{name}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <p className='poke-level'>lv. {level}</p>
-                        </Col>
-                        <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-                        </Col>
-                    </Row>
+                {cardTop}
                     {/* CARD MIDDLE // MOVESET + SPRITE */}
                     <Row className='card-middle'>
                         <Col lg={12}>
