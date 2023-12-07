@@ -21,7 +21,7 @@ import natures from '../../assets/data/natures';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
+function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
 
 
     const handleFlip = () => {
@@ -108,13 +108,8 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
         const updatedPokemon = {
             name: editName,
             level: editLevel,
-            ability: editAbility,
-            nature: editNature,
-            moves: editMoves,
-            sprite: editSprite,
-            stats: editStats,
         };
-        editPokemon(updatedPokemon);
+        setTeamMember(updatedPokemon);
         setIsEditMode(false);
     };
 
