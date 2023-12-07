@@ -125,10 +125,10 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
                 {isEditMode ? (
-                            <>
-                            <label htmlFor='level-input rc-400' className='level-label'>lv.</label>
-                            <input id='level-input' className='pokemon-input level-input rc-400' type='text' value={editLevel} onChange={e => setEditLevel(e.target.value)} />
-                        </>
+                    <>
+                        <label htmlFor='level-input rc-400' className='level-label'>lv.</label>
+                        <input id='level-input' className='pokemon-input level-input rc-400' type='text' value={editLevel} onChange={e => setEditLevel(e.target.value)} />
+                    </>
                 ) : (
                     <p className='poke-level'>lv. {level}</p>
                 )}
@@ -154,7 +154,7 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         const totalStat = calculateTotalStats(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures);
         const width = totalStat / (statName === 'HP' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE) * 100;
         const color = calculateColor(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures, MAX_HP_STAT_VALUE, MAX_OTHER_STAT_VALUE);
-    
+
         return (
             <Row className='stat-table'>
                 <div className='d-flex'>
@@ -193,15 +193,16 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                     ))}
 
                     {isEditMode ? (
-                                    <select className='pokemon-input rc-400' value={editNature} onChange={e => setEditNature(e.target.value)}>
-                                    <option value="">--select nature--</option>
-                                    {Object.keys(natures).map((nature, index) => (
-                                        <option key={index} value={nature}>{nature}</option>
-                                    ))}
-                                </select>
-) : (
-    <></>
-)}
+                        <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                            {Object.keys(natures).map(nature => {
+                                const { increase, decrease } = natures[nature];
+                                const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
+                                return <option key={nature} value={nature}>{label}</option>
+                            })}
+                        </select>
+                    ) : (
+                        <></>
+                    )}
 
                 </Row>
             ) : (
@@ -258,11 +259,12 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                                         {/* will populate with data from api fetch */}
                                     </select>
 
-                                    <select className='pokemon-input rc-400' value={editNature} onChange={e => setEditNature(e.target.value)}>
-                                        <option value="">--select nature--</option>
-                                        {Object.keys(natures).map((nature, index) => (
-                                            <option key={index} value={nature}>{nature}</option>
-                                        ))}
+                                    <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                                        {Object.keys(natures).map(nature => {
+                                            const { increase, decrease } = natures[nature];
+                                            const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
+                                            return <option key={nature} value={nature}>{label}</option>
+                                        })}
                                     </select>
                                 </>
                             ) : (
