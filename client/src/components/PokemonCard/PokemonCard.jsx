@@ -89,8 +89,16 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     const [editMoves, setEditMoves] = useState(moves);
     const [editSprite, setEditSprite] = useState(sprite);
     const [editStats, setEditStats] = useState(stats);
+    const [pokemonNames, setPokemonNames] = useState([]);
 
+    // API CALL TO GET LIST OF POKEMON NAMES
+    useEffect(() => {
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+            .then(response => response.json())
+            .then(data => setPokemonNames(data.results.map(pokemon => pokemon.name)));
+    }, []);
 
+    // This useEffect hook will run whenever the editName state changes
     useEffect(() => {
         if (!isEditMode) {
             setEditName(name);
@@ -102,12 +110,21 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     };
 
     const handleSaveClick = () => {
+        if (!pokemonNames.includes(editName)) {
+            // turn this into a prettier alert later
+            // also might want to think about if we care about what the case gets set to.
+            alert('Please enter a valid Pokémon name.');
+            return;
+        }
+
         const updatedPokemon = {
             name: editName,
             level: editLevel,
             nature: editNature,
             ability: editAbility,
+            moves: editMoves,
         };
+
         setTeamMember(updatedPokemon);
         setIsEditMode(false);
     };
@@ -118,7 +135,14 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
             <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
                 {isEditMode ? (
-                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} />
+                    <>
+                        <input list="pokemon-names" type="text" value={editName} onChange={e => setEditName(e.target.value)} />
+                        <datalist id="pokemon-names">
+                            {pokemonNames.map((name, index) => (
+                                <option key={index} value={name}>{name}</option>
+                            ))}
+                        </datalist>
+                    </>
                 ) : (
                     <p className='poke-name'>{name}</p>
                 )}
