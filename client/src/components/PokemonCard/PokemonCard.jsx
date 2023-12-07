@@ -126,8 +126,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
                 {isEditMode ? (
                     <>
-                        <label htmlFor='level-input rc-400 poke-level' className='level-label'>lv.</label>
-                        <input id='level-input' className='pokemon-input level-input rc-400' type='text' value={editLevel} onChange={e => setEditLevel(e.target.value)} />
+                        <label htmlFor='sm-input rc-400' className='sm-label'>lv.</label>
+                        <input id='sm-input' className='pokemon-input sm-input rc-400' type='text' value={editLevel} onChange={e => setEditLevel(e.target.value)} />
                     </>
                 ) : (
                     <p className='poke-level'>lv. {level}</p>
@@ -194,11 +194,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
                     {isEditMode ? (
                         <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
-                            {/* map over the keys of the nature object to... */}
                             {Object.keys(natures).map(nature => {
-                                // destructure the increase and decrease properties of each nature
                                 const { increase, decrease } = natures[nature];
-                                // if the nature has both an increase and decrease property, display both, otherwise just display the nature name
                                 const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
                                 return <option key={nature} value={nature}>{label}</option>
                             })}
@@ -263,11 +260,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                                     </select>
 
                                     <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
-                                        {/* map over the keys of the nature object to... */}
                                         {Object.keys(natures).map(nature => {
-                                            // destructure the increase and decrease properties of each nature
                                             const { increase, decrease } = natures[nature];
-                                            // if the nature has both an increase and decrease property, display both, otherwise just display the nature name
                                             const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
                                             return <option key={nature} value={nature}>{label}</option>
                                         })}
