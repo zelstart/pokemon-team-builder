@@ -21,7 +21,7 @@ import natures from '../../assets/data/natures';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown'] }) {
+function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown'] }) {
 
 
     const handleFlip = () => {
@@ -33,9 +33,9 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
     const pokemonLevel = level;
     // set the base stats, ivs, and evs to the values passed in as props, or to '--' if they are not passed in
-    const [baseStats, setBaseStats] = useState(stats.base || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
-    const [ivStats, setIvStats] = useState(stats.iv || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
-    const [evStats, setEvStats] = useState(stats.ev || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [baseStats, setBaseStats] = useState(stats || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [ivStats, setIvStats] = useState(ivs || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [evStats, setEvStats] = useState(evs || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
 
     // create an array of objects for each stat
     const statsArray = [
@@ -89,9 +89,11 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     const [editMoves, setEditMoves] = useState(moves);
     const [editSprite, setEditSprite] = useState(sprite);
     const [editStats, setEditStats] = useState(stats);
+    const [editIVs, setEditIVs] = useState(ivs);
+    const [editEVs, setEditEVs] = useState(evs);
     const [pokemonNames, setPokemonNames] = useState([]);
 
-    // API CALL TO GET LIST OF POKEMON NAMES
+    // API CALL TO GET LIST OF POKEMON NAMES 
     useEffect(() => {
         fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
             .then(response => response.json())
@@ -123,6 +125,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
             nature: editNature,
             ability: editAbility,
             moves: editMoves,
+            ivs: editIVs,
+            evs: editEVs,
         };
 
         setTeamMember(updatedPokemon);
@@ -228,14 +232,22 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                             <Row>
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index}>
-                                        <p className='rc-400'>{moves[index] || '--'}</p>
+                                        {isEditMode ? (
+                                            <input type="text" value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)} />
+                                        ) : (
+                                            <p className='rc-400'>{moves[index] || '--'}</p>
+                                        )}
                                     </Col>
                                 ))}
                             </Row>
                             <Row>
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index + 2}>
-                                        <p className='rc-400'>{moves[index + 2] || '--'}</p>
+                                        {isEditMode ? (
+                                            <input type="text" value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)} />
+                                        ) : (
+                                            <p className='rc-400'>{moves[index + 2] || '--'}</p>
+                                        )}
                                     </Col>
                                 ))}
                             </Row>

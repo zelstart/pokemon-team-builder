@@ -13,14 +13,31 @@ const CreateTeam = () => {
         Types: ['Electric'],
         stats: {
             hp: 35,
-            attack: 55,
-            defense: 40,
-            specialAttack: 50,
-            specialDefense: 50,
-            speed: 90
+            atk: 55,
+            def: 40,
+            spa: 50,
+            spd: 50,
+            spe: 90
+        },
+        ivs: {
+            hp: 31,
+            atk: 0,
+            def: 31,
+            spa: 31,
+            spd: 31,
+            spe: 31
+
+        },
+        evs: {
+            hp: 4,
+            atk: 0,
+            def: 0,
+            spa: 252,
+            spd: 0,
+            spe: 252
         },
         sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-        
+
     }));
 
     const handleSetTeamMember = (index, newMember) => {
