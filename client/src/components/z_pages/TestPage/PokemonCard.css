@@ -4,9 +4,6 @@
   border-radius: 10px;
   padding: 0px 15px;
   position: relative;
-  min-height: 200px; 
-  max-height: 500px; 
-  overflow: auto;
 }
 
 .poke-card p {
@@ -33,7 +30,7 @@
   cursor: default;
 }
 
-.rc-400 {
+.poke-move {
   font-family: 'Roboto Condensed', sans-serif;  
   font-weight: 400;
   letter-spacing: .03rem;
@@ -41,12 +38,12 @@
   cursor: pointer;
 }
 
-.poke-icon {
-  height: auto;
-  width: 60px;
-  margin-top: 2px;
-  margin-bottom: 3px;
-}
+.nature, .ability, .moves, .stats, .iv-spread, .ev-spread {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: .8rem;
+  letter-spacing: .05rem;
+  cursor: pointer;
+} 
 
 .types {
   padding: 0;
@@ -63,13 +60,9 @@
   margin-bottom: 3px;
 }
 
-.rc-400-bold {
-  cursor: default;
-  font-family: 'Roboto Condensed', sans-serif;  
-  font-weight: 400;
-  letter-spacing: .03rem;
-  font-size: .8rem;
+.bold {
   font-weight: 600;
+  cursor: default;
 }
 
 .stat-button {
@@ -79,51 +72,27 @@
   display: inline-block;
   background-color: var(--red);
   cursor: pointer;
-  height: 100%;
-  width: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: width 0.3s;
-
-
   font-family: 'Roboto', sans-serif;  
   font-weight: 500;
   color: white;
   padding: 1px 10px;
+  border-top-left-radius: 10px;
   font-size: .8rem;
   letter-spacing: .05rem;
 }
 
-.stat-button .stats-text {
-  opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  transition: opacity 0.3s, max-width 0.3s;
-}
-
-.stat-button:hover {
-  width: 25px; 
-}
-
-.stat-button:hover .stats-text {
-  opacity: 1;
-  max-width: 50px;
+.stats-chevron {
+  font-size: .7rem;
 }
 
 .stat-bar {
-  display: inline-block;
   height: 15px;
   border-radius: 3px;
   transition: width 0.5s ease-in-out;
 }
 
-/* rapid fire clicking of elements on the page won't trigger highlight 
-this will prevent highlighting of any kind which wasn't really but i wanted, but for now
-this works. */
-.no-select {
-  user-select: none; /* Standard syntax */
-  -webkit-user-select: none; /* Chrome, Safari, and Opera syntax */
-  -moz-user-select: none; /* Firefox syntax */
-  -ms-user-select: none; /* IE and Edge syntax */
+.stat-line {
+  display: grid;
+  grid-template-columns: 30px 30px auto;
+  align-items: center;
 }
