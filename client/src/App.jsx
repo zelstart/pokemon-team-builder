@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Container } from 'react-bootstrap';
 
-import Nav from "./components/Header/nav.jsx";
+import Header from "./components/Header/nav.jsx";
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -21,7 +21,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Container fluid>
-        <Nav/>
+        <Header/>
         <Outlet />
         {/* <Footer /> */}
       </Container>
