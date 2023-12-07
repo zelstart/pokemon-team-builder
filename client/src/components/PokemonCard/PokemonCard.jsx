@@ -23,7 +23,6 @@ import natures from '../../assets/data/natures';
 
 function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown'] }) {
 
-
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
@@ -112,15 +111,19 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     };
 
     const handleSaveClick = () => {
-        if (!pokemonNames.includes(editName)) {
-            // turn this into a prettier alert later
-            // also might want to think about if we care about what the case gets set to.
+        // sets the name to all lowercase to match the API so you don't get errors for invalid pokemon names
+        const formattedEditName = editName.toLowerCase();
+        // checks if the name entered is a valid pokemon name
+        if (!pokemonNames.map(name => name.toLowerCase()).includes(formattedEditName)) {
             alert('Please enter a valid Pokémon name.');
             return;
         }
-
+    
+        // capitalize the first letter of the pokemon name
+        const capitalizedEditName = formattedEditName.charAt(0).toUpperCase() + formattedEditName.slice(1);
+    
         const updatedPokemon = {
-            name: editName,
+            name: capitalizedEditName,
             level: editLevel,
             nature: editNature,
             ability: editAbility,
