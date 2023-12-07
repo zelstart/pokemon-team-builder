@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
 import '../../style.css';
 import './PokemonCard.css';
@@ -118,10 +119,10 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
             alert('Please enter a valid Pokémon name.');
             return;
         }
-    
+
         // capitalize the first letter of the pokemon name
         const capitalizedEditName = formattedEditName.charAt(0).toUpperCase() + formattedEditName.slice(1);
-    
+
         const updatedPokemon = {
             name: capitalizedEditName,
             level: editLevel,
@@ -143,8 +144,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
             <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
                 {isEditMode ? (
                     <>
-                        <input list="pokemon-names" type="text" value={editName} onChange={e => setEditName(e.target.value)} />
-                        <datalist id="pokemon-names">
+                        <input className='pokemon-input rc-400' list='pokemon-names' type='text' value={editName} onChange={e => setEditName(e.target.value)} />
+                        <datalist id='pokemon-names'>
                             {pokemonNames.map((name, index) => (
                                 <option key={index} value={name}>{name}</option>
                             ))}
@@ -157,7 +158,10 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
                 {isEditMode ? (
-                    <input type="text" value={editLevel} onChange={e => setEditLevel(e.target.value)} />
+                            <>
+                            <label htmlFor='level-input rc-400' className='level-label'>lv.</label>
+                            <input id='level-input' className='pokemon-input level-input rc-400' type='text' value={editLevel} onChange={e => setEditLevel(e.target.value)} />
+                        </>
                 ) : (
                     <p className='poke-level'>lv. {level}</p>
                 )}
@@ -236,7 +240,10 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index}>
                                         {isEditMode ? (
-                                            <input type="text" value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)} />
+                                            <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
+                                                <option value="">--select move--</option>
+                                                {/* will populate with data from api fetch */}
+                                            </select>
                                         ) : (
                                             <p className='rc-400'>{moves[index] || '--'}</p>
                                         )}
@@ -247,7 +254,10 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                                 {[...Array(2)].map((_, index) => (
                                     <Col lg={6} md={6} sm={6} key={index + 2}>
                                         {isEditMode ? (
-                                            <input type="text" value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)} />
+                                            <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
+                                                <option value="">--select move--</option>
+                                                {/* will populate with data from api fetch */}
+                                            </select>
                                         ) : (
                                             <p className='rc-400'>{moves[index + 2] || '--'}</p>
                                         )}
@@ -265,8 +275,13 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                         <Col lg={6} sm={6}>
                             {isEditMode ? (
                                 <>
-                                    <input type="text" value={editAbility} onChange={e => setEditAbility(e.target.value)} />
-                                    <select value={editNature} onChange={e => setEditNature(e.target.value)}>
+                                    <select className='pokemon-input rc-400' type='text' value={editAbility} onChange={e => setEditAbility(e.target.value)}>
+                                        <option value="">--select ability--</option>
+                                        {/* will populate with data from api fetch */}
+                                    </select>
+
+                                    <select className='pokemon-input rc-400' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                                        <option value="">--select nature--</option>
                                         {Object.keys(natures).map((nature, index) => (
                                             <option key={index} value={nature}>{nature}</option>
                                         ))}
