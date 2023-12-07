@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
 import '../../style.css';
 import './PokemonCard.css';
@@ -22,19 +22,7 @@ import natures from '../../assets/data/natures';
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
 function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
-    const [isFlipped, setIsFlipped] = useState(false);
-    const [isEditMode, setIsEditMode] = useState(false);
-    const [editName, setEditName] = useState(name);
-    const [editLevel, setEditLevel] = useState(level);
-    const [editAbility, setEditAbility] = useState(ability);
-    const [editNature, setEditNature] = useState(nature);
-    const [editMoves, setEditMoves] = useState(moves);
-    const [editSprite, setEditSprite] = useState(sprite);
-    const [editStats, setEditStats] = useState(stats);
 
-    const handleEditClick = () => {
-        setIsEditMode(!isEditMode);
-    };
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -92,6 +80,80 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
         return `rgb(${red}, ${green}, 0)`;
     };
 
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [editName, setEditName] = useState(name);
+    const [editLevel, setEditLevel] = useState(level);
+    const [editAbility, setEditAbility] = useState(ability);
+    const [editNature, setEditNature] = useState(nature);
+    const [editMoves, setEditMoves] = useState(moves);
+    const [editSprite, setEditSprite] = useState(sprite);
+    const [editStats, setEditStats] = useState(stats);
+
+    useEffect(() => {
+        setEditName(name);
+        setEditLevel(level);
+        setEditAbility(ability);
+        setEditNature(nature);
+        setEditMoves(moves);
+        setEditSprite(sprite);
+        setEditStats(stats);
+    }, [name, level, ability, nature, moves, sprite, stats]);
+
+    const handleEditClick = () => {
+        setIsEditMode(!isEditMode);
+    };
+
+    const handleSaveClick = () => {
+        const updatedPokemon = {
+            name: editName,
+            level: editLevel,
+            ability: editAbility,
+            nature: editNature,
+            moves: editMoves,
+            sprite: editSprite,
+            stats: editStats,
+        };
+        editPokemon(updatedPokemon);
+        setIsEditMode(false);
+    };
+
+    // creates the card-top section of the card
+    const cardTop = (
+        <Row className='card-top justify-content-center'>
+
+            <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
+                {isEditMode ? (
+                    <input type="text" value={editName} onChange={e => setEditName(e.target.value)} />
+                ) : (
+                    <p className='poke-name'>{name}</p>
+                )}
+            </Col>
+
+            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                {isEditMode ? (
+                    <input type="text" value={editLevel} onChange={e => setEditLevel(e.target.value)} />
+                ) : (
+                    <p className='poke-level'>lv. {level}</p>
+                )}
+            </Col>
+
+            <Col lg={1} className='d-flex align-items-center justify-content-start'>
+                <FontAwesomeIcon
+                    icon={isEditMode ? faFloppyDisk : faPenToSquare}
+                    onClick={isEditMode ? handleSaveClick : handleEditClick}
+                    className='edit-save'
+                />
+            </Col>
+
+            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+            </Col>
+
+        </Row>
+    );
+
+
     // creates a row for each stat
     const StatRow = ({ statName, baseStat, iv, ev }) => {
         const totalStat = calculateTotalStats(statName.toLowerCase());
@@ -113,32 +175,11 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
         );
     };
 
-    // i'm thinking the best/easiest way is going to be make each field on the card editable. maybe add a little edit
-    // icon, and when you click it, it turns into a form field. then when you click out of it, it turns back into text
-    // and saves the value to the database. 
-
-    const cardTop = (
-        <Row className='card-top justify-content-center'>
-          <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
-            <p className='poke-name'>{name}</p>
-          </Col>
-          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-            <p className='poke-level'>lv. {level}</p>
-          </Col>
-          <Col lg={1} className='d-flex align-items-center justify-content-start'>
-            <FontAwesomeIcon icon={isEditMode ? faFloppyDisk : faPenToSquare} onClick={handleEditClick} className='edit-save' />
-          </Col>
-          <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-            <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
-          </Col>
-        </Row>
-      );
-
     return (
-            <div className='poke-card m-1'>
-              {isFlipped ? (
+        <div className='poke-card m-1'>
+            {isFlipped ? (
                 <Row className='justify-content-center no-select'>
-                  {cardTop}
+                    {cardTop}
 
                     {/* CARD MIDDLE // STATS */}
                     {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
@@ -159,7 +200,7 @@ function PokemonCard({ name = '--', level = '--', ability = '--', stats = {}, mo
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
                 <Row className='justify-content-center no-select'>
-                {cardTop}
+                    {cardTop}
                     {/* CARD MIDDLE // MOVESET + SPRITE */}
                     <Row className='card-middle'>
                         <Col lg={12}>
