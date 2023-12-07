@@ -50,26 +50,35 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     // calculate the stats for the pokemon
     const calculateTotalStats = (stat) => {
         let totalStat;
+        let level = Number(pokemonLevel); // Ensure pokemonLevel is a number
+    
         if (stat === 'hp') {
-            totalStat = ((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * pokemonLevel / 100) + pokemonLevel + 10;
+            totalStat = Math.floor(((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * level / 100));
         } else {
-            totalStat = ((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * pokemonLevel / 100) + 5;
+            totalStat = Math.floor(((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * level / 100));
         }
-
+    
+        // add level and 10 (for HP) or 5 (for other stats) after rounding down
+        if (stat === 'hp') {
+            totalStat += level + 10;
+        } else {
+            totalStat += 5;
+        }
+    
         // adjust the stat based on the nature
         const natureEffect = natures[nature];
         if (natureEffect) {
             if (natureEffect.increase === stat) {
-                totalStat *= 1.1;
+                totalStat = Math.floor(totalStat * 1.1);
             }
             if (natureEffect.decrease === stat) {
-                totalStat *= 0.9;
+                totalStat = Math.floor(totalStat * 0.9);
             }
         }
-
-        return Math.round(totalStat);
+    
+        return totalStat;
     };
-
+    
     // color the bars based on stat value
     const calculateColor = (stat) => {
         const totalStat = calculateTotalStats(stat);
@@ -196,7 +205,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                     <Col lg={1} className='rc-400 stat-margin'>{baseStat}</Col>
                     <Col lg={1} className='rc-400 stat-margin'>{iv}</Col>
                     <Col lg={1} className='rc-400 stat-margin'>{ev}</Col>
-                    <Col lg={5} className='rc-400 d-flex align-items-center'>
+                    <Col lg={1} className='rc-400 stat-margin'>{totalStat}</Col>
+                    <Col lg={5} className='rc-400 stat-margin d-flex align-items-center'>
                         <div className='stat-bar' style={{ width: `${width}%`, backgroundColor: color }}></div>
                     </Col>
                 </div>
@@ -218,7 +228,7 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                             <Col lg={1} className='rc-400-bold stat-margin'>Base</Col>
                             <Col lg={1} className='rc-400-bold stat-margin'>IV</Col>
                             <Col lg={1} className='rc-400-bold stat-margin'>EV</Col>
-                            <Col lg={5}></Col>
+                            <Col lg={5} className='rc-400-bold stat-margin'>Total</Col>
                         </div>
                     </Row>
                     {statsArray.map((stat) => (
