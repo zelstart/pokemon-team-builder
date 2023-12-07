@@ -10,6 +10,7 @@ import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
+import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 // what needs to be done: 
@@ -32,10 +33,9 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     const MAX_OTHER_STAT_VALUE = 250;
 
     const pokemonLevel = level;
-    // set the base stats, ivs, and evs to the values passed in as props, or to '--' if they are not passed in
-    const [baseStats, setBaseStats] = useState(stats || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
-    const [ivStats, setIvStats] = useState(ivs || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
-    const [evStats, setEvStats] = useState(evs || { hp: '--', atk: '--', def: '--', spa: '--', spd: '--', spe: '--' });
+    const [baseStats, setBaseStats] = useState(stats || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
+    const [ivStats, setIvStats] = useState(ivs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
+    const [evStats, setEvStats] = useState(evs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
 
     // create an array of objects for each stat
     const statsArray = [
@@ -46,48 +46,6 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         { name: 'SpD', base: baseStats.spd, iv: ivStats.spd, ev: evStats.spd },
         { name: 'Spe', base: baseStats.spe, iv: ivStats.spe, ev: evStats.spe },
     ];
-
-    // calculate the stats for the pokemon
-    const calculateTotalStats = (stat) => {
-        let totalStat;
-        let level = Number(pokemonLevel); // Ensure pokemonLevel is a number
-    
-        if (stat === 'hp') {
-            totalStat = Math.floor(((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * level / 100));
-        } else {
-            totalStat = Math.floor(((2 * baseStats[stat] + ivStats[stat] + Math.floor(evStats[stat] / 4)) * level / 100));
-        }
-    
-        // add level and 10 (for HP) or 5 (for other stats) after rounding down
-        if (stat === 'hp') {
-            totalStat += level + 10;
-        } else {
-            totalStat += 5;
-        }
-    
-        // adjust the stat based on the nature
-        const natureEffect = natures[nature];
-        if (natureEffect) {
-            if (natureEffect.increase === stat) {
-                totalStat = Math.floor(totalStat * 1.1);
-            }
-            if (natureEffect.decrease === stat) {
-                totalStat = Math.floor(totalStat * 0.9);
-            }
-        }
-    
-        return totalStat;
-    };
-    
-    // color the bars based on stat value
-    const calculateColor = (stat) => {
-        const totalStat = calculateTotalStats(stat);
-        const maxStat = stat === 'hp' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE;
-        const totalStatPercentage = (totalStat / maxStat) * 100;
-        const green = Math.round((totalStatPercentage / 100) * 255);
-        const red = 255 - green;
-        return `rgb(${red}, ${green}, 0)`;
-    };
 
     const [isFlipped, setIsFlipped] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
@@ -191,13 +149,12 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         </Row>
     );
 
-
     // creates a row for each stat
     const StatRow = ({ statName, baseStat, iv, ev }) => {
-        const totalStat = calculateTotalStats(statName.toLowerCase());
+        const totalStat = calculateTotalStats(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures);
         const width = totalStat / (statName === 'HP' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE) * 100;
-        const color = calculateColor(statName.toLowerCase());
-
+        const color = calculateColor(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures, MAX_HP_STAT_VALUE, MAX_OTHER_STAT_VALUE);
+    
         return (
             <Row className='stat-table'>
                 <div className='d-flex'>
