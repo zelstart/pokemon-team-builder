@@ -10,19 +10,19 @@ function Nav () {
 
     return (
 
-        <nav className='d-flex'>
+        <nav className='d-flex pt-3'>
 
-            <img className = "px-5"src={pokeDex} alt="A pokedex outline!" />
+            <img className = "ps-5"src={pokeDex} alt="A pokedex outline!" />
 
-            <section id =  "navbar" className='d-flex '>
+            <section id =  "" className='d-flex flex-column'>
 
-                <section id='name' className= 'pt-2 '>
+                <section id='name' className= 'd-flex align-items-center ps-3'>
 
-                    <h1>Pokemon Team Builder</h1>
+                    <h1 id='title'>Pokemon Team Builder</h1>
 
                 </section>
 
-                <section id='links' className='d-flex'>
+                <section id='links' className='d-flex align-items-center ps-3'>
 
                     <Link to="/"
                     
