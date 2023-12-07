@@ -21,7 +21,7 @@ import natures from '../../assets/data/natures';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown', 'unknown'] }) {
+function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--', stats = {}, moves = [], sprite = SpritePlaceholder, nature = '--', types = ['unknown'] }) {
 
 
     const handleFlip = () => {
@@ -90,15 +90,12 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     const [editSprite, setEditSprite] = useState(sprite);
     const [editStats, setEditStats] = useState(stats);
 
+
     useEffect(() => {
-        setEditName(name);
-        setEditLevel(level);
-        setEditAbility(ability);
-        setEditNature(nature);
-        setEditMoves(moves);
-        setEditSprite(sprite);
-        setEditStats(stats);
-    }, [name, level, ability, nature, moves, sprite, stats]);
+        if (!isEditMode) {
+            setEditName(name);
+        }
+    }, [name, isEditMode]);
 
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
@@ -108,6 +105,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         const updatedPokemon = {
             name: editName,
             level: editLevel,
+            nature: editNature,
+            ability: editAbility,
         };
         setTeamMember(updatedPokemon);
         setIsEditMode(false);
@@ -225,8 +224,21 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                     {/* CARD BOTTOM // ABILITY + NATURE */}
                     <Row className='card-bottom'>
                         <Col lg={6} sm={6}>
-                            <p><span className='rc-400-bold'>ability: </span><span className='rc-400'>{ability}</span></p>
-                            <p><span className='rc-400-bold'>nature: </span><span className='rc-400'>{nature}</span></p>
+                            {isEditMode ? (
+                                <>
+                                    <input type="text" value={editAbility} onChange={e => setEditAbility(e.target.value)} />
+                                    <select value={editNature} onChange={e => setEditNature(e.target.value)}>
+                                        {Object.keys(natures).map((nature, index) => (
+                                            <option key={index} value={nature}>{nature}</option>
+                                        ))}
+                                    </select>
+                                </>
+                            ) : (
+                                <>
+                                    <p><span className='rc-400-bold'>ability: </span><span className='rc-400'>{ability}</span></p>
+                                    <p><span className='rc-400-bold'>nature: </span><span className='rc-400'>{nature}</span></p>
+                                </>
+                            )}
                         </Col>
 
                         <Col lg={6} sm={6} className='types d-flex flex-column'>
