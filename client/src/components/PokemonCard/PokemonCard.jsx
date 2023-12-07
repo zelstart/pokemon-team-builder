@@ -192,6 +192,17 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                         <StatRow key={stat.name} statName={stat.name} baseStat={stat.base} iv={stat.iv} ev={stat.ev} />
                     ))}
 
+                    {isEditMode ? (
+                                    <select className='pokemon-input rc-400' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                                    <option value="">--select nature--</option>
+                                    {Object.keys(natures).map((nature, index) => (
+                                        <option key={index} value={nature}>{nature}</option>
+                                    ))}
+                                </select>
+) : (
+    <></>
+)}
+
                 </Row>
             ) : (
                 // CARD FRONT // MOVES, SPRITE, ABILITY, NATURE
