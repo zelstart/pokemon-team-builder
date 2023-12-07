@@ -126,6 +126,10 @@
   transition: width 0.5s ease-in-out;
 }
 
+.stat-margin {
+  margin-right: 10px;
+}
+
 /* rapid fire clicking of elements on the page won't trigger highlight 
 this will prevent highlighting of any kind which wasn't really but i wanted, but for now
 this works. */

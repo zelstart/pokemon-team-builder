@@ -95,7 +95,7 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
     // API CALL TO GET LIST OF POKEMON NAMES 
     useEffect(() => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100')
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=1118')
             .then(response => response.json())
             .then(data => setPokemonNames(data.results.map(pokemon => pokemon.name)));
     }, []);
@@ -192,11 +192,11 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         return (
             <Row className='stat-table'>
                 <div className='d-flex'>
-                    <Col className='rc-400-bold'>{statName}</Col>
-                    <Col className='rc-400'>{baseStat}</Col>
-                    <Col className='rc-400'>{iv}</Col>
-                    <Col className='rc-400'>{ev}</Col>
-                    <Col className='rc-400 d-flex align-items-center'>
+                    <Col lg={1} className='rc-400-bold stat-margin'>{statName}</Col>
+                    <Col lg={1} className='rc-400 stat-margin'>{baseStat}</Col>
+                    <Col lg={1} className='rc-400 stat-margin'>{iv}</Col>
+                    <Col lg={1} className='rc-400 stat-margin'>{ev}</Col>
+                    <Col lg={5} className='rc-400 d-flex align-items-center'>
                         <div className='stat-bar' style={{ width: `${width}%`, backgroundColor: color }}></div>
                     </Col>
                 </div>
@@ -211,14 +211,14 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
                     {cardTop}
 
                     {/* CARD MIDDLE // STATS */}
-                    {/* I dont love it right now. I want the first four columns to be narrower than the last, but it is what it is for now.*/}
+                    {/* Looks better on large screens now. Just gotta make it work with smaller screens.*/}
                     <Row className='stat-table'>
                         <div className='d-flex'>
-                            <Col className='rc-400-bold'>Stat</Col>
-                            <Col className='rc-400-bold'>Base</Col>
-                            <Col className='rc-400-bold'>IV</Col>
-                            <Col className='rc-400-bold'>EV</Col>
-                            <Col></Col>
+                            <Col lg={1} className='rc-400-bold stat-margin'>Stat</Col>
+                            <Col lg={1} className='rc-400-bold stat-margin'>Base</Col>
+                            <Col lg={1} className='rc-400-bold stat-margin'>IV</Col>
+                            <Col lg={1} className='rc-400-bold stat-margin'>EV</Col>
+                            <Col lg={5}></Col>
                         </div>
                     </Row>
                     {statsArray.map((stat) => (
