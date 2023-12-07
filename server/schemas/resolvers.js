@@ -15,15 +15,11 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, { username, password }) => {
-      console.log("mutation for addUser");
       const user = await User.create({ username, password });
-      console.log(user);
       const token = signToken(user);
-      console.log(token);
       return { token, user };
     },
     login: async (parent, { username, password }) => {
-      console.log("login");
       const user = await User.findOne({ username });
 
       if (!user) {
