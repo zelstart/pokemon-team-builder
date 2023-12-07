@@ -1,18 +1,4 @@
-#navbar{
 
-    background-image: url("../../assets/Red&White.jpg");
-
-    background-size: contain;
-
-    width: 100dvw;
-
-    height: 15dvh;
-
-    background-repeat: repeat-x;
-
-    position: relative;
-
-}
 
 *{
 
@@ -44,13 +30,30 @@ img{
 
 }
 
+#name{
+
+   height: 10dvh;
+
+   background: white;
+
+
+
+}
+
+#title {
+
+    font-size: 8dvh;
+
+}
+
 #links {
 
-    color: blue;
+    font-size: 2dvh;
 
-    position: absolute;
+    background-color: red;
 
-    bottom: 25%;
+    height: 5dvh;
 
-    left: 20px;
+    width : 100dvw;
+
 }
