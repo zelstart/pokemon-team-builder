@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link , useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import SignUpForm from '../SignUpForm/SignupForm.jsx';
+import SignUpForm from '../SignupForm/SignupForm.jsx';
 import LoginForm from '../LoginForm/LoginForm.jsx';
 
 import Auth from '../utils/auth';
@@ -18,19 +18,19 @@ function Header () {
 
     return (
         <>
-            <nav className='d-flex'>
+            <nav className='d-flex pt-3'>
 
-                <img className = "px-5"src={pokeDex} alt="A pokedex outline!" />
+                <img className = "ps-5"src={pokeDex} alt="A pokedex outline!" />
 
-                <section id =  "navbar" className='d-flex '>
+                <section id =  "" className='d-flex flex-column'>
 
-                    <section id='name' className= 'pt-2 '>
+                    <section id='name' className= 'd-flex align-items-center ps-3'>
 
-                        <h1>Pokemon Team Builder</h1>
+                        <h1 id='title'>Pokemon Team Builder</h1>
 
                     </section>
 
-                    <section id='links' className='d-flex'>
+                    <section id='links' className='d-flex align-items-center ps-3'>
 
                         <Link to="/"
                         
@@ -43,18 +43,14 @@ function Header () {
                             className={currentPage === '/teams' ? 'nav-link px-2 active' : ' px-2 nav-link'}
                         
                         >Teams</Link> 
+
+                        
                         {/* if user is logged in show logout button */}
                         {Auth.loggedIn() ? (
                             <Nav.Link className='nav-link pe-2' onClick={Auth.logout}>Logout</Nav.Link>
                         ) : (
                             <Nav.Link className='nav-link pe-2' onClick={() => setShowModal(true)}>Login</Nav.Link>
                         )}
-
-                        <Link to="/login"
-                        
-                            className={currentPage === '/login' ? 'pe-2 nav-link active' : 'nav-link pe-2'}
-                        
-                        >Login</Link> 
 
 
                     </section>
