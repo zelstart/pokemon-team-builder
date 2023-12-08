@@ -9,7 +9,7 @@
 }
 
 img {
-    height: 30dvh;
+    height: 20dvh;
 }
 
 #name {
@@ -28,9 +28,11 @@ img {
 
 #title {
     font-size: 8dvh;
+    margin-top: 50px;
 }
 
 #links {
+    margin-top: 20px;
     background-color: var(--red);
     height: 5dvh;
     width: 100dvw;
