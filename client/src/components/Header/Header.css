@@ -22,6 +22,7 @@ img {
     height: 2dvh;
     width: 2dvh;
     display: block;
+    margin-right: 5px;
 }
 
 #title {
