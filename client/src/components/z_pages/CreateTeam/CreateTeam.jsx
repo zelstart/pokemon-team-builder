@@ -57,7 +57,7 @@ const CreateTeam = () => {
     const handleSaveTeam = () => {
         // code to save the team to the user's account
         // for right now just a console log :p
-        console.log('Team saved:', teamName, team);
+        console.log('Team saved:', teamName, teamMembers);
     };
 
     return (
@@ -69,14 +69,14 @@ const CreateTeam = () => {
                     </div>
                     <div>
                         <input
-                            className='mx-1'
+                            className='mx-1 team-name-input'
                             type="text"
                             id="teamName"
                             value={teamName}
                             onChange={e => setTeamName(e.target.value)}
                         />
                     </div>
-                    <button className='my-4 mx-1' onClick={handleSaveTeam}>Save Team</button>
+                    <button className='my-4 mx-1 save-team' onClick={handleSaveTeam}>save team</button>
                 </Col>
             </Row>
 
