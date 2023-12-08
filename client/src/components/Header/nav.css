@@ -31,7 +31,7 @@ img {
 #links {
   font-size: 2dvh;
 
-  background-color: red;
+  background-color: var(--red);
 
   height: 5dvh;
 
