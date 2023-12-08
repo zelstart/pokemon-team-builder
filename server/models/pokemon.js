@@ -2,6 +2,11 @@ const { Schema, model } = require('mongoose');
 
 const pokemonSchema = new Schema(
   {
+    level : {
+    type: Number,
+    required: true,
+    default: 1
+    },
     pokeDexNo : {
     type: Number,
     required: true,
