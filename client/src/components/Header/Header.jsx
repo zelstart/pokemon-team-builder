@@ -4,11 +4,11 @@ import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../SignupForm/SignupForm.jsx";
 import LoginForm from "../LoginForm/LoginForm.jsx";
 
-import Auth from "../utils/auth";
+import Auth from "../utils/auth.js";
 
 import pokeDex from "../../assets/pokeDex.png";
 
-import "./nav.css";
+import "./Header.css";
 
 function Header() {
   // set modal display state
