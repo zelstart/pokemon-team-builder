@@ -40,6 +40,14 @@ h1 {
     margin-bottom: 0;
 }
 
+h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+    font-size: 1.5rem;
+
+}
+
 /*  */
 #links {
     font-family: 'Roboto Condensed', sans-serif;
