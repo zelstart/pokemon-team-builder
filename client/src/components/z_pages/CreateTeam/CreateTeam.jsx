@@ -6,7 +6,7 @@ import './CreateTeam.css';
 const CreateTeam = () => {
     const [teamName, setTeamName] = useState('');
 
-    // Initialize an array of objects for the state
+    // Initial state for a team member
     const initialState = {
         name: 'Pikachu',
         level: 10,
