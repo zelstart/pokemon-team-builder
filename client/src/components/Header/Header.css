@@ -1,5 +1,6 @@
 .nav-link {
     transition: ease-in-out 0.2s;
+    cursor: pointer;
 }
 
 #links .nav-link:hover {
