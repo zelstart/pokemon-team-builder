@@ -2,7 +2,7 @@
     transition: ease-in-out 0.2s;
 }
 
-.nav-link:hover {
+#links .nav-link:hover {
     font-size: larger;
     text-shadow: 1px 1px 8px rgba(70, 70, 70, 0.748);
 }
