@@ -62,6 +62,7 @@ function Header() {
       </nav>
       {/* set modal data up for logging in */}
       <Modal
+      className='modal-style'
         size="lg"
         show={showModal}
         onHide={() => setShowModal(false)}

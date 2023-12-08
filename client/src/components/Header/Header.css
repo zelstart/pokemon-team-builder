@@ -38,3 +38,29 @@ img {
     letter-spacing: .06rem;
     color: white !important;
 }
+
+
+.modal-style .btn, .modal-style .nav-link.active  {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-style .nav-link {
+    color: var(--red)
+}
+
+.modal-style .nav-link.active:hover {
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.748);
+}
+
+.modal-style .nav-link:hover {
+    text-shadow: 3px 3px 5px rgba(142, 142, 142, 0.281);
+}
+
+.modal-style .btn:hover{
+    box-shadow: 3px 3px 8px rgba(142, 142, 142, 0.281);
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+}
