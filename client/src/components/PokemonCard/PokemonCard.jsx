@@ -11,7 +11,7 @@ import SpritePlaceholder from '../../assets/images/placeholders/sprite-placehold
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
-import {getPokemonInfo} from '../utils/pokemonApi.js';
+import { getPokemonInfo } from '../utils/pokemonApi.js';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
 // what needs to be done: 
@@ -63,8 +63,8 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
     const [pokemonInfo, setPokemonInfo] = useState([]);
 
     // API CALL TO GET LIST OF POKEMON NAMES 
-    useEffect(() => {   
-        getPokemonInfo()    
+    useEffect(() => {
+        getPokemonInfo()
             .then(pokemonInfo => setPokemonInfo(pokemonInfo))
             .catch(error => console.error('Error:', error));
     }, []);
@@ -105,6 +105,25 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
         setIsEditMode(false);
     };
 
+    const handleNameBlur = () => {
+        getPokemonInfo(editName.toLowerCase())
+            .then(info => {
+                setPokemonInfo(info);
+                // setEditSprite(info.sprites.front_default);
+                // setEditMoves(info.moves);
+                // setBaseStats(info.baseStats);
+                // setAbility(info.ability);
+            })
+            .catch(error => console.error('Error:', error));
+    };
+    
+    const handleNameKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleNameBlur();
+        }
+    };
+
+
     // creates the card-top section of the card
     const cardTop = (
         <Row className='card-top justify-content-center'>
@@ -112,8 +131,14 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
             <Col lg={6} md={6} sm={6} className='d-flex align-items-center'>
                 {isEditMode ? (
                     <>
-                        <input className='pokemon-input rc-400' list='pokemon-names' type='text' value={editName} onChange={e => setEditName(e.target.value)} />
-                        <datalist id='pokemon-names'>
+                        <input
+                            type="text"
+                            value={editName}
+                            onChange={e => setEditName(e.target.value)}
+                            onBlur={handleNameBlur}
+                            onKeyDown={handleNameKeyDown}
+                            list="pokemon-names"
+                        />                        <datalist id='pokemon-names'>
                             {pokemonInfo.map((pokemon, index) => (
                                 <option key={index} value={pokemon.name}>
                                     {pokemon.name}
@@ -151,6 +176,7 @@ function PokemonCard({ setTeamMember, name = '--', level = '--', ability = '--',
 
         </Row>
     );
+
 
     // creates a row for each stat
     const StatRow = ({ statName, baseStat, iv, ev }) => {
