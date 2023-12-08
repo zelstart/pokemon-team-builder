@@ -32,10 +32,10 @@ function Header() {
             </Link>
 
             <Link
-              to="/my-teams"
+              to="/me"
               className="nav-link d-flex align-items-center px-3"
             >
-              <span className={currentPage === "/my-teams" ? "icon" : ""}></span>
+              <span className={currentPage === "/me" ? "icon" : ""}></span>
               my teams
             </Link>
 

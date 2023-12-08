@@ -12,7 +12,6 @@ const client = new ApolloClient({
 
 import './style.css';
 // uncomment these once components are created
-// import Header from './components/Header/Header';
 // import Footer from './components/Footer/Footer';
 
 
