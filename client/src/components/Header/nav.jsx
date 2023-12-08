@@ -28,15 +28,23 @@ function Header() {
 
           <section id="links" className="d-flex align-items-center ps-3">
             <Link to="/" className="nav-link d-flex align-items-center">
-              <span className={currentPage === "/" ? "icon" : ""}></span>Home
+              <span className={currentPage === "/" ? "icon" : ""}></span>home
             </Link>
 
             <Link
-              to="/teams"
+              to="/my-teams"
               className="nav-link d-flex align-items-center px-3"
             >
-              <span className={currentPage === "/teams" ? "icon" : ""}></span>
-              Teams
+              <span className={currentPage === "/my-teams" ? "icon" : ""}></span>
+              my teams
+            </Link>
+
+            <Link
+              to="/create-team"
+              className="nav-link d-flex align-items-center px-3"
+            >
+              <span className={currentPage === "/create-team" ? "icon" : ""}></span>
+              +new team
             </Link>
 
             {/* if user is logged in show logout button */}
@@ -46,7 +54,7 @@ function Header() {
               </a>
             ) : (
               <a className="nav-link pe-2" onClick={() => setShowModal(true)}>
-                Login/Signup
+                login/signup
               </a>
             )}
           </section>
