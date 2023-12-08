@@ -41,9 +41,9 @@ h1 {
 }
 
 /*  */
-#links {
+#links, a .nav-link {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 600;
     font-size: 1.5rem;
-    color: white;
+    color: white !important;
 }
