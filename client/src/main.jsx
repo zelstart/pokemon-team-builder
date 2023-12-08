@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
-import Test from './components/z_pages/TestPage/PokemonCard.jsx';
 // uncomment these as components/pages are created
-// import Home from '.components/z_pages/Home.jsx';
+import Home from './components/z_pages/Home/Home.jsx';
 import CreateTeam from './components/z_pages/CreateTeam/CreateTeam.jsx';
+import MyTeamView from './components/z_pages/MyTeamView/MyTeamView.jsx';
 // import Me from './components/z_pages/Me.jsx';
 // import Profile from './components/z_pages/Profile.jsx';
-// import TeamView from './components/z_pages/TeamView.jsx';
 // import NotFound from './components/z_pages/NotFound.jsx';
 
 
@@ -22,12 +21,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Test />
+        element: <Home />
       },
+      {
+        path: '/me',
+        element: <MyTeamView />
+      }, 
       // {
-      //   path: '/me',
-      //   element: <Me />
-      // }, {
       //   path: '/profile/:id',
       //   element: <Profile />
       // }, 
