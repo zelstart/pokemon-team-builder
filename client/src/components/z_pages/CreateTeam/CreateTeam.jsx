@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import { React, useState } from 'react';
 import PokemonCard from '../../PokemonCard/PokemonCard.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const CreateTeam = () => {
+    const [teamName, setTeamName] = useState('');
+    
     // Initialize an array of objects for the state
-    const [team, setTeam] = useState(new Array(6).fill({
+    const initialState = {
         name: 'Pikachu',
         level: 10,
         moves: ['Tackle', 'Growl', 'Thunder Shock', 'Tail Whip'],
@@ -37,35 +39,56 @@ const CreateTeam = () => {
             spe: 252
         },
         sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
+    }
 
-    }));
+    const [teamMembers, setTeamMembers] = useState([initialState]);
 
     const handleSetTeamMember = (index, newMember) => {
-        setTeam(prevTeam => prevTeam.map((member, i) => i === index ? newMember : member));
+        setTeamMembers(prevTeam => prevTeam.map((member, i) => i === index ? newMember : member));
+    };
+
+    const addTeamMember = () => {
+        if (teamMembers.length < 6) {
+            setTeamMembers([...teamMembers, initialState]);
+        }
+    };
+
+    const handleSaveTeam = () => {
+        // code to save the team to the user's account
+        // for right now just a console log :p
+        console.log('Team saved:', teamName, team);
     };
 
     return (
         <Container className='mt-2'>
             <Row>
-                {team.slice(0, 3).map((pokemon, index) => (
-                    <Col lg={4} key={index} className='mb-4'>
-                        <PokemonCard 
-                            {...pokemon}
-                            setTeamMember={(newMember) => handleSetTeamMember(index, newMember)}
+                <Col>
+                    <div>
+                        <label className='mt-3 mx-1' htmlFor="teamName"><h3>Team Name:</h3></label>
+                    </div>
+                    <div>
+                        <input 
+                            className='mx-1'
+                            type="text"
+                            id="teamName"
+                            value={teamName}
+                            onChange={e => setTeamName(e.target.value)}
                         />
-                    </Col>
-                ))}
+                    </div>
+                    <button className='my-4 mx-1' onClick={handleSaveTeam}>Save Team</button>
+                </Col>
             </Row>
-            <Row>
-                {team.slice(3, 6).map((pokemon, index) => (
-                    <Col lg={4} key={index + 3} className='mb-4'>
-                        <PokemonCard 
-                            {...pokemon}
-                            setTeamMember={(newMember) => handleSetTeamMember(index + 3, newMember)}
-                        />
-                    </Col>
-                ))}
-            </Row>
+
+        <Row>
+            {teamMembers.map((member, index) => (
+                <Col lg={4} key={index} className='mb-4'>
+                    <PokemonCard {...member} />
+                </Col>
+            ))}
+        </Row>
+        {teamMembers.length < 6 && (
+            <button className='mx-1' onClick={addTeamMember}>Add Pokemon</button>
+        )}
         </Container>
     );
 };
