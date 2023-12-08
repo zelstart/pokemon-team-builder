@@ -32,17 +32,17 @@ function Header () {
 
                     <section id='links' className='d-flex align-items-center ps-3'>
 
-                        <Link to="/"
-                        
-                            className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
-                        
-                        >Home</Link> 
+                    <Link to="/"
+                    
+                        className='nav-link d-flex align-items-center'
+                    
+                    ><span className={currentPage === '/' ? 'icon' : ''}></span>Home</Link> 
 
-                        <Link to="/teams"
-                        
-                            className={currentPage === '/teams' ? 'nav-link px-2 active' : ' px-2 nav-link'}
-                        
-                        >Teams</Link> 
+                    <Link to="/teams"
+                    
+                    className='nav-link d-flex align-items-center px-3'
+                    
+                    ><span className={currentPage === '/teams' ? 'icon' : ''}></span>Teams</Link> 
 
                         
                         {/* if user is logged in show logout button */}

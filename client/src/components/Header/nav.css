@@ -18,12 +18,6 @@
     
 }
 
-.active {
-
-    color: blue;
-
-}
-
 img{
 
     height: 30dvh;
@@ -39,6 +33,15 @@ img{
 
 
 }
+
+.icon {
+    background: url('./../../assets/pokeball-pokemon-svgrepo-com.svg');
+    background-size: contain;
+    height: 2dvh;
+    width: 2dvh;
+    display: block;
+} 
+
 
 #title {
 
