@@ -1,10 +1,11 @@
 import { React, useState } from 'react';
 import PokemonCard from '../../PokemonCard/PokemonCard.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
+import './CreateTeam.css';
 
 const CreateTeam = () => {
     const [teamName, setTeamName] = useState('');
-    
+
     // Initialize an array of objects for the state
     const initialState = {
         name: 'Pikachu',
@@ -67,7 +68,7 @@ const CreateTeam = () => {
                         <label className='mt-3 mx-1' htmlFor="teamName"><h3>Team Name:</h3></label>
                     </div>
                     <div>
-                        <input 
+                        <input
                             className='mx-1'
                             type="text"
                             id="teamName"
@@ -79,16 +80,18 @@ const CreateTeam = () => {
                 </Col>
             </Row>
 
-        <Row>
-            {teamMembers.map((member, index) => (
-                <Col lg={4} key={index} className='mb-4'>
-                    <PokemonCard {...member} />
-                </Col>
-            ))}
-        </Row>
-        {teamMembers.length < 6 && (
-            <button className='mx-1' onClick={addTeamMember}>Add Pokemon</button>
-        )}
+            <Row>
+                {teamMembers.map((member, index) => (
+                    <Col lg={4} key={index} className='mb-4'>
+                        <PokemonCard {...member} />
+                    </Col>
+                ))}
+                {teamMembers.length < 6 && (
+                    <Col lg={4} className='mb-4 d-flex justify-content-center align-items-center'>
+                        <button className='mx-1 add-pkmn' onClick={addTeamMember}>add a pokémon</button>
+                    </Col>
+                )}
+            </Row>
         </Container>
     );
 };
