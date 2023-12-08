@@ -1,39 +1,39 @@
-* {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+.nav-link {
+    transition: ease-in-out 0.2s;
 }
 
 .nav-link:hover {
-  font-size: larger;
+    font-size: larger;
+    text-shadow: 1px 1px 8px rgba(70, 70, 70, 0.748);
 }
 
 img {
-  height: 30dvh;
+    height: 30dvh;
 }
 
 #name {
-  height: 10dvh;
-
-  background: white;
+    height: 10dvh;
+    background: white;
 }
 
 .icon {
-  background: url("./../../assets/pokeball-pokemon-svgrepo-com.svg");
-  background-size: contain;
-  height: 2dvh;
-  width: 2dvh;
-  display: block;
+    background: url("./../../assets/pokeball-pokemon-svgrepo-com.svg");
+    background-size: contain;
+    height: 2dvh;
+    width: 2dvh;
+    display: block;
 }
 
 #title {
-  font-size: 8dvh;
+    font-size: 8dvh;
 }
 
 #links {
-  font-size: 2dvh;
-
-  background-color: var(--red);
-
-  height: 5dvh;
-
-  width: 100dvw;
+    background-color: var(--red);
+    height: 5dvh;
+    width: 100dvw;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: .06rem;
+    color: white !important;
 }

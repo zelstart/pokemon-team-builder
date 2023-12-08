@@ -27,7 +27,7 @@ function Header() {
           </section>
 
           <section id="links" className="d-flex align-items-center ps-3">
-            <Link to="/" className="nav-link d-flex align-items-center">
+            <Link to="/" className="nav-link d-flex align-items-center px-3">
               <span className={currentPage === "/" ? "icon" : ""}></span>home
             </Link>
 
@@ -49,11 +49,11 @@ function Header() {
 
             {/* if user is logged in show logout button */}
             {Auth.loggedIn() ? (
-              <a className="nav-link pe-2" onClick={Auth.logout}>
+              <a className="nav-link px-3" onClick={Auth.logout}>
                 Logout
               </a>
             ) : (
-              <a className="nav-link pe-2" onClick={() => setShowModal(true)}>
+              <a className="nav-link px-3" onClick={() => setShowModal(true)}>
                 login/signup
               </a>
             )}
