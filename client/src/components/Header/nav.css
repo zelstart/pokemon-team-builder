@@ -1,59 +1,39 @@
-
-
-*{
-
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
+* {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-
-
-.nav-link:hover{
-
-    font-size: larger;
-
-    
+.nav-link:hover {
+  font-size: larger;
 }
 
-img{
-
-    height: 30dvh;
-
+img {
+  height: 30dvh;
 }
 
-#name{
+#name {
+  height: 10dvh;
 
-   height: 10dvh;
-
-   background: white;
-
-
-
+  background: white;
 }
 
 .icon {
-    background: url('./../../assets/pokeball-pokemon-svgrepo-com.svg');
-    background-size: contain;
-    height: 2dvh;
-    width: 2dvh;
-    display: block;
-} 
-
+  background: url("./../../assets/pokeball-pokemon-svgrepo-com.svg");
+  background-size: contain;
+  height: 2dvh;
+  width: 2dvh;
+  display: block;
+}
 
 #title {
-
-    font-size: 8dvh;
-
+  font-size: 8dvh;
 }
 
 #links {
+  font-size: 2dvh;
 
-    font-size: 2dvh;
+  background-color: red;
 
-    background-color: red;
+  height: 5dvh;
 
-    height: 5dvh;
-
-    width : 100dvw;
-
+  width: 100dvw;
 }
