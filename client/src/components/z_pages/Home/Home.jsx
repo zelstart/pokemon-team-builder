@@ -9,12 +9,12 @@ const Home = () => {
         teamName: "Team Name Here",
         // rating: 4.5,
         pokemon: [
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Pikachu", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
+            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
         ],
         user: "User1",
         creator: "Creator1"
@@ -28,10 +28,9 @@ const Home = () => {
                 </Col>
             </Row>
 
+{/* Will turn this into a map later */}
             <Row className='mx-5'>
-
                     <TeamCard {...teamData} />
-
             </Row>
         </Container>
     )
