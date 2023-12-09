@@ -276,9 +276,12 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
                         </Col>
 
                         <Col lg={6} sm={6} className='types d-flex flex-column'>
-                            {types.slice(0, 2).map((type, index) => (
-                                <img className='type-icon' key={index} src={typesIcons[type]} alt={type} />
-                            ))}
+                            {types.slice(0, 2).map((type, index) => {
+                                const icon = typesIcons[type.toLowerCase()];
+                                return (
+                                    <img className='type-icon' key={index} src={icon} alt={type} />
+                                );
+                            })}
                         </Col>
                     </Row>
 
