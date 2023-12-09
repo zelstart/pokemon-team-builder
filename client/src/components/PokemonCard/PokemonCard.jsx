@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
 import '../../style.css';
 import './PokemonCard.css';
