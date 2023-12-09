@@ -23,7 +23,7 @@ import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
+function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -100,7 +100,7 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
             evs: editEVs,
         };
 
-        setTeamMember(updatedPokemon);
+        setTeamMembers(updatedPokemon);
         setIsEditMode(false);
     };
 
