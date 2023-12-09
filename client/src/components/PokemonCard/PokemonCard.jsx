@@ -193,13 +193,13 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
                     ))}
 
                     {isEditMode ? (
-                        <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                        <Select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
                             {Object.keys(natures).map(nature => {
                                 const { increase, decrease } = natures[nature];
                                 const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
                                 return <option key={nature} value={nature}>{label}</option>
                             })}
-                        </select>
+                        </Select>
                     ) : (
                         <></>
                     )}
