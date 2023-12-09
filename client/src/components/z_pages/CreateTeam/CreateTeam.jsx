@@ -13,7 +13,7 @@ const CreateTeam = () => {
         moves: ['Tackle', 'Growl', 'Thunder Shock', 'Tail Whip'],
         ability: 'Static',
         nature: 'Hardy',
-        Types: ['Electric'],
+        types: ['Electric'],
         stats: {
             hp: 35,
             atk: 55,
@@ -79,11 +79,13 @@ const CreateTeam = () => {
                     <button className='my-4 mx-1 save-team' onClick={handleSaveTeam}>save team</button>
                 </Col>
             </Row>
-
             <Row>
                 {teamMembers.map((member, index) => (
                     <Col lg={4} key={index} className='mb-4'>
-                        <PokemonCard {...member} />
+                        <PokemonCard
+                            {...member}
+                            setTeamMembers={(newMember) => handleSetTeamMember(index, newMember)}
+                        />
                     </Col>
                 ))}
                 {teamMembers.length < 6 && (
