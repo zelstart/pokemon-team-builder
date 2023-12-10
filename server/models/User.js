@@ -12,6 +12,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    savedTeams: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Teams',
+      },
+    ],
   },
 );
 
