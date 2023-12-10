@@ -43,15 +43,18 @@ const resolvers = {
 
       return { token, user };
     },
-    createTeam: async (parent, {}, context) => {
+    createTeam: async (parent, {name}, context) => {
       if (context.user) {
+        const teamName = name ? name : "";
         const team = await Teams.create({
           userCreator: context.user.username,
+          name: teamName
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { teams: team._id } }
+          { $addToSet: { teams: team._id } },
+          { new: true, }
         );
 
         return team;

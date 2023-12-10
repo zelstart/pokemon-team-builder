@@ -25,8 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_TEAM = gql`
-  mutation createTeam() {
-    createTeam() {
+  mutation createTeam($name: String!) {
+    createTeam(name: $name) {
       _id
       name
       userCreator
