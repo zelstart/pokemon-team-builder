@@ -50,7 +50,11 @@ const typeDefs = `
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, password: String!): Auth
-    createTeam(): Team
+    createTeam(): Teams
+    removeTeam(teamId: ID!): Teams
+    addPokemon(pokeDexNo: Number!): Teams
+    removePokemon(pokeId: ID!): Teams
+    updatePokemon(pokeId: ID!, level: Number!, move_1: String!, move_2: String!, move_3: String!, move_4: String!, ability: String!, item: String!, hp_ev: Number!, attack_ev: Number!, special_attack_ev: Number!, defense_ev: Number!, special_defense_ev: Number!, speed_ev: Number!, hp_iv: Number!, attack_iv: Number!, special_attack_iv: Number!, defense_iv: Number!, special_defense_iv: Number!, speed_iv: Number!): Teams
   }
 `;
 
