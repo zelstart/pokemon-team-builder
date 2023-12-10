@@ -22,7 +22,6 @@ window.onload = async function() {
         pokemon.classList.add("pokemon-name");
         pokemon.addEventListener("click", updatePokemon);
         document.getElementById("pokemon-list").append(pokemon);
-
     }
 
     document.getElementById("pokemon-description").innerText = pokedexEntry[1].desc;
@@ -70,10 +69,10 @@ async function getPokemon(num) {
     }
 }
 
+
 function updatePokemon() {
     document.getElementById("pokemon-img").src = pokedexEntry[this.id].img;
     
-
     // Clear previous types
     let typesDiv = document.getElementById("pokemon-types");
     while (typesDiv.firstChild) {
