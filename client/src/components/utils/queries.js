@@ -8,3 +8,99 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_TEAMS = gql`
+query getTeams {
+  teams {
+    _id
+    name
+    userCreator
+    pokemon {
+      level
+      pokeDexNo
+      move_1
+      move_2
+      move_3
+      move_4
+      ability
+      item
+      hp_ev
+      attack_ev
+      special_attack_ev
+      defense_ev
+      special_defense_ev
+      speed_ev
+      hp_iv
+      attack_iv
+      special_attack_iv
+      defense_iv
+      special_defense_iv
+      speed_iv
+    }
+  }
+}
+`;
+
+export const QUERY_SINGLE_TEAMS = gql`
+query getSingleTeams {
+  userTeams {
+    _id
+    name
+    userCreator
+    pokemon {
+      level
+      pokeDexNo
+      move_1
+      move_2
+      move_3
+      move_4
+      ability
+      item
+      hp_ev
+      attack_ev
+      special_attack_ev
+      defense_ev
+      special_defense_ev
+      speed_ev
+      hp_iv
+      attack_iv
+      special_attack_iv
+      defense_iv
+      special_defense_iv
+      speed_iv
+    }
+  }
+}
+`;
+
+export const QUERY_SINGLE_TEAM = gql`
+query getSingleTeam($thoughtId: ID!) {
+  team(teamId: $teamId) {
+    _id
+    name
+    userCreator
+    pokemon {
+      level
+      pokeDexNo
+      move_1
+      move_2
+      move_3
+      move_4
+      ability
+      item
+      hp_ev
+      attack_ev
+      special_attack_ev
+      defense_ev
+      special_defense_ev
+      speed_ev
+      hp_iv
+      attack_iv
+      special_attack_iv
+      defense_iv
+      special_defense_iv
+      speed_iv
+    }
+  }
+}
+`;

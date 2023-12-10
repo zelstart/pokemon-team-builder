@@ -12,12 +12,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    userTeams: async (parent, { username }) => {
+    teams: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Teams.find(params).sort({ createdAt: -1 });
-    },
-    teams: async (parent, {}) => {
-      return Teams.find().sort({ createdAt: -1 });
     },
     team: async (parent, { teamId }) => {
       return Teams.findOne({ _id: teamId });
