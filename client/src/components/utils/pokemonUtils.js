@@ -1,5 +1,4 @@
-const MAX_HP_STAT_VALUE = 720;
-const MAX_OTHER_STAT_VALUE = 250;
+
 
 
 export const calculateTotalStats = (stat, baseStats = {}, ivStats = {}, evStats = {}, pokemonLevel, nature, natures = {}) => {
