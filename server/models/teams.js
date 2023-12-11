@@ -9,7 +9,12 @@ const teamsSchema = new Schema(
         type: String,
         required: true
     } ,
-     pokemon : [pokemonSchema]
+    userCreator: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    pokemon : [pokemonSchema]
   },
 );
 

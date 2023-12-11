@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+import { Col, Row } from 'react-bootstrap';
 import './TeamCard.css';
 
 // these should be the names of the props we'll be using.
@@ -10,21 +10,24 @@ import './TeamCard.css';
 // that function will probably live in the home page, since that's where the team cards will be rendered.
 function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator }) {
   return (
-    <Card className="card">
-      <Card.Body>
-        <div className="top-element">{teamName}</div>
-        <div className="middle-element">
-        {/* Map the team's pokemon info in this element, just the icon and name for now */}
+    <Col lg={3} className='team-card'>
+      <div className='team-card-body'>
+        <Row className='top-element justify-content-center'>{teamName}</Row>
+        <Row className='middle-element align-content-between'>
           {pokemon.map((p, index) => (
-            <div key={index} className="team-row">
-              <img src={p.icon} alt={p.name} />
-              <span>{p.name}</span>
-            </div>
+            <Row key={index} className='team-row align-content-center'>
+              <Col lg={4} className=''>
+                <img className='team-icon' src={p.icon} alt={p.name} />
+              </Col>
+              <Col className='d-flex align-items-center'>
+                <p className='rc-400-bold p-name m-0 p-0'>{p.name}</p>
+              </Col>
+            </Row>
           ))}
-        </div>
-        <div className="bottom-element">{/* TODO: rating system. */}</div>
-      </Card.Body>
-    </Card>
+        </Row>
+        <Row className='bottom-element'>{/* TODO: rating system. */}</Row>
+      </div>
+    </Col>
   );
 }
 

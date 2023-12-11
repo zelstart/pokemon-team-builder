@@ -80,7 +80,4 @@ const pokemonSchema = new Schema(
   },
 );
 
-
-const Pokemon = model('Pokemon', pokemonSchema);
-
-module.exports = Pokemon;
+module.exports = pokemonSchema;
