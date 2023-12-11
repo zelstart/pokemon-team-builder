@@ -32,9 +32,9 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     const MAX_OTHER_STAT_VALUE = 250;
 
     const pokemonLevel = level;
-    const [baseStats, setBaseStats] = useState(stats || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
-    const [ivStats, setIvStats] = useState(ivs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
-    const [evStats, setEvStats] = useState(evs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 });
+    const [baseStats, setBaseStats] = useState(stats);
+    const [ivStats, setIvStats] = useState(ivs);
+    const [evStats, setEvStats] = useState(evs);
 
     // create an array of objects for each stat
     const statsArray = [
@@ -46,6 +46,12 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
         { name: 'Spe', base: baseStats.spe, iv: ivStats.spe, ev: evStats.spe },
     ];
 
+    const initialEditIVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
+    const initialEditEVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
+
+    const [editIVs, setEditIVs] = useState(initialEditIVs);
+    const [editEVs, setEditEVs] = useState(initialEditEVs);
+
     const [isFlipped, setIsFlipped] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [editName, setEditName] = useState(name);
@@ -55,8 +61,6 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     const [editMoves, setEditMoves] = useState(moves);
     const [editSprite, setEditSprite] = useState(sprite);
     const [editStats, setEditStats] = useState(stats);
-    const [editIVs, setEditIVs] = useState(ivs);
-    const [editEVs, setEditEVs] = useState(evs);
     const [pokemonNames, setPokemonNames] = useState([]);
 
     // API CALL TO GET LIST OF POKEMON NAMES 
@@ -72,14 +76,14 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
             setEditName(name);
         }
     }, [name, isEditMode]);
-
-    const handleIVChange = (statName, newValue) => {
-        setEditIVs(prevIVs => ({ ...prevIVs, [statName.toLowerCase()]: parseInt(newValue) }));
-    };
-
-    const handleEVChange = (statName, newValue) => {
-        setEditEVs(prevEVs => ({ ...prevEVs, [statName.toLowerCase()]: parseInt(newValue) }));
-    };
+    
+    function handleIVChange(statName, value) {
+        setEditIVs(prevIVs => ({ ...prevIVs, [statName]: value }));
+    }
+    
+    function handleEVChange(statName, value) {
+        setEditEVs(prevEVs => ({ ...prevEVs, [statName]: value }));
+    }
 
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
@@ -157,15 +161,13 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     );
 
     // creates a row for each stat
-    function StatRow({ statName, baseStat, handleIVChange, handleEVChange }) {
-        const iv = editIVs[statName.toLowerCase()];
-        const ev = editEVs[statName.toLowerCase()];
+    function renderStatRow(statName, baseStat, handleIVChange, handleEVChange, iv, ev, key) {
         const totalStat = calculateTotalStats(statName.toLowerCase(), baseStats, editIVs, editEVs, pokemonLevel, nature, natures);
         const width = totalStat / (statName === 'HP' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE) * 100;
         const color = calculateColor(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures, MAX_HP_STAT_VALUE, MAX_OTHER_STAT_VALUE);
 
         return (
-            <Row className='stat-table'>
+            <Row className='stat-table' key={key}>
                 <div className='d-flex'>
                     <Col lg={1} className='rc-400-bold stat-margin'>{statName}</Col>
                     <Col lg={1} className='rc-400 stat-margin'>{baseStat}</Col>
@@ -188,8 +190,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                 </div>
             </Row>
         );
-    };
-
+    }
     return (
         <div className='poke-card m-1'>
             {isFlipped ? (
@@ -207,17 +208,13 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                             <Col lg={5} className='rc-400-bold stat-margin'>Total</Col>
                         </div>
                     </Row>
-                    {statsArray.map((stat, index) => (
-                        <StatRow
-                            key={index}
-                            statName={stat.name}
-                            baseStat={stat.base}
-                            handleIVChange={handleIVChange}
-                            handleEVChange={handleEVChange}
-                            editIVs={editIVs}
-                            editEVs={editEVs}
-                        />
-                    ))}
+                    {statsArray.map((stat, index) => {
+                        const { name: statName, base: baseStat } = stat;
+                        const iv = editIVs[statName];
+                        const ev = editEVs[statName];
+
+                        return renderStatRow(statName, baseStat, handleIVChange, handleEVChange, iv, ev, index);
+                    })}
 
                     {isEditMode ? (
                         <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
