@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
-import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
+import SpritePlaceholder from '/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
