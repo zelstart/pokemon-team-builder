@@ -73,6 +73,14 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
         }
     }, [name, isEditMode]);
 
+    const handleIVChange = (statName, newValue) => {
+        setEditIVs(prevIVs => ({ ...prevIVs, [statName.toLowerCase()]: parseInt(newValue) }));
+    };
+
+    const handleEVChange = (statName, newValue) => {
+        setEditEVs(prevEVs => ({ ...prevEVs, [statName.toLowerCase()]: parseInt(newValue) }));
+    };
+
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
     };
@@ -149,8 +157,10 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     );
 
     // creates a row for each stat
-    const StatRow = ({ statName, baseStat, iv, ev }) => {
-        const totalStat = calculateTotalStats(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures);
+    function StatRow({ statName, baseStat, handleIVChange, handleEVChange }) {
+        const iv = editIVs[statName.toLowerCase()];
+        const ev = editEVs[statName.toLowerCase()];
+        const totalStat = calculateTotalStats(statName.toLowerCase(), baseStats, editIVs, editEVs, pokemonLevel, nature, natures);
         const width = totalStat / (statName === 'HP' ? MAX_HP_STAT_VALUE : MAX_OTHER_STAT_VALUE) * 100;
         const color = calculateColor(statName.toLowerCase(), baseStats, ivStats, evStats, pokemonLevel, nature, natures, MAX_HP_STAT_VALUE, MAX_OTHER_STAT_VALUE);
 
@@ -159,8 +169,18 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                 <div className='d-flex'>
                     <Col lg={1} className='rc-400-bold stat-margin'>{statName}</Col>
                     <Col lg={1} className='rc-400 stat-margin'>{baseStat}</Col>
-                    <Col lg={1} className='rc-400 stat-margin'>{iv}</Col>
-                    <Col lg={1} className='rc-400 stat-margin'>{ev}</Col>
+                    <Col lg={1} className='rc-400 stat-margin'>
+                        {isEditMode ?
+                            <input className='sm-input' type="number" value={iv} onChange={(e) => handleIVChange(statName, e.target.value)} /> :
+                            iv
+                        }
+                    </Col>
+                    <Col lg={1} className='rc-400 stat-margin'>
+                        {isEditMode ?
+                            <input className='sm-input' type="number" value={ev} onChange={(e) => handleEVChange(statName, e.target.value)} /> :
+                            ev
+                        }
+                    </Col>
                     <Col lg={1} className='rc-400 stat-margin'>{totalStat}</Col>
                     <Col lg={5} className='rc-400 stat-margin d-flex align-items-center'>
                         <div className='stat-bar' style={{ width: `${width}%`, backgroundColor: color }}></div>
@@ -187,8 +207,16 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                             <Col lg={5} className='rc-400-bold stat-margin'>Total</Col>
                         </div>
                     </Row>
-                    {statsArray.map((stat) => (
-                        <StatRow key={stat.name} statName={stat.name} baseStat={stat.base} iv={stat.iv} ev={stat.ev} />
+                    {statsArray.map((stat, index) => (
+                        <StatRow
+                            key={index}
+                            statName={stat.name}
+                            baseStat={stat.base}
+                            handleIVChange={handleIVChange}
+                            handleEVChange={handleEVChange}
+                            editIVs={editIVs}
+                            editEVs={editEVs}
+                        />
                     ))}
 
                     {isEditMode ? (
