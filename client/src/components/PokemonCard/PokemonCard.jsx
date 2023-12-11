@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Select from 'react-select';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
 import '../../style.css';
 import './PokemonCard.css';
@@ -23,7 +22,7 @@ import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
 // 7. Add an onChange event to each input field that updates the corresponding state.
 // 8. When the user is done editing, have a save button that sends a mutation to the GraphQL API to update the team object.
 
-function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
+function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -100,7 +99,7 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
             evs: editEVs,
         };
 
-        setTeamMember(updatedPokemon);
+        setTeamMembers(updatedPokemon);
         setIsEditMode(false);
     };
 
@@ -193,13 +192,13 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
                     ))}
 
                     {isEditMode ? (
-                        <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
+                        <Select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
                             {Object.keys(natures).map(nature => {
                                 const { increase, decrease } = natures[nature];
                                 const label = increase && decrease ? `${nature} (+${increase.toUpperCase()}, -${decrease.toUpperCase()})` : nature;
                                 return <option key={nature} value={nature}>{label}</option>
                             })}
-                        </select>
+                        </Select>
                     ) : (
                         <></>
                     )}
@@ -276,9 +275,12 @@ function PokemonCard({ setTeamMember, name, level, ability, stats = {}, ivs, evs
                         </Col>
 
                         <Col lg={6} sm={6} className='types d-flex flex-column'>
-                            {types.slice(0, 2).map((type, index) => (
-                                <img className='type-icon' key={index} src={typesIcons[type]} alt={type} />
-                            ))}
+                            {types.slice(0, 2).map((type, index) => {
+                                const icon = typesIcons[type.toLowerCase()];
+                                return (
+                                    <img className='type-icon' key={index} src={icon} alt={type} />
+                                );
+                            })}
                         </Col>
                     </Row>
 
