@@ -27,16 +27,14 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server));
   app.use(routes);
   // if we're in production, serve client/dist as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-
-  // add a wildcard route to serve up the client's index.html file
-  app.get('*', (req, res) => {
-    if (!req.path.endsWith('.js') && !req.path.endsWith('.css')) {
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  
+    // add a wildcard route to serve up the client's index.html file
+    app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-    }
-  });
-}
+    });
+  }
 
   db.once('open', () => {
     app.listen(PORT, () => {
