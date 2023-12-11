@@ -4,7 +4,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pokemon-t
   useNewUrlParser: true,
   useUnifiedTopology: true,
   ssl: true,
-  replicaSet: 'atlas-xx-yyzz'
 });
 
 module.exports = mongoose.connection;
