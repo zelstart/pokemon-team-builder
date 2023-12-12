@@ -13,7 +13,11 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
+  context: ({ req }) => {
+    const token = req.headers.authorization || '';
+    return { token };
+  },
+
   cors: {
     origin: '*', // Allow all origins
     credentials: true // Credentials are allowed
@@ -24,7 +28,9 @@ const startApolloServer = async () => {
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-  app.use('/graphql', expressMiddleware(server));
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
   app.use(routes);
   // if we're in production, serve client/build as static assets
   if (process.env.NODE_ENV === 'production') {

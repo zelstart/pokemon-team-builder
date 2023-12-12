@@ -44,7 +44,6 @@ const resolvers = {
       return { token, user };
     },
     createTeam: async (parent, {name}, context) => {
-      console.log(context.user)
       if (context.user) {
         const teamName = name ? name : "";
         const team = await Teams.create({

@@ -17,8 +17,6 @@ const CreateTeam = () => {
 
     const [teamName, setTeamName] = useState('');
 
-    console.log(token)
-
     if (!token) {
         return false;
     }
@@ -74,7 +72,6 @@ const CreateTeam = () => {
     const handleSaveTeam = async () => {
         // code to save the team to the user's account
         // for right now just a console log :p
-        
         try {
 
             const responseTeam = await maker({variables : {name : teamName}});
