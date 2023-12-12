@@ -10,6 +10,7 @@ import SpritePlaceholder from '/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
+import { getPokemonInfo } from '../utils/pokemonApi.js';
 
 // ivs and evs are buggy.
 
@@ -54,11 +55,12 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     const [editStats, setEditStats] = useState(stats);
     const [pokemonNames, setPokemonNames] = useState([]);
 
-    // API CALL TO GET LIST OF POKEMON NAMES 
+    const [pokemonInfo, setPokemonInfo] = useState([]);
+
     useEffect(() => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=1118')
-            .then(response => response.json())
-            .then(data => setPokemonNames(data.results.map(pokemon => pokemon.name)));
+        getPokemonInfo()
+            .then(pokemonInfo => setPokemonInfo(pokemonInfo))
+            .catch(error => console.error('Error:', error));
     }, []);
 
     // This useEffect hook will run whenever the editName state changes
@@ -67,11 +69,11 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
             setEditName(name);
         }
     }, [name, isEditMode]);
-    
+
     function handleIVChange(statName, value) {
         setEditIVs(prevIVs => ({ ...prevIVs, [statName]: value }));
     }
-    
+
     function handleEVChange(statName, value) {
         setEditEVs(prevEVs => ({ ...prevEVs, [statName]: value }));
     }
@@ -81,10 +83,8 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     };
 
     const handleSaveClick = () => {
-        // sets the name to all lowercase to match the API so you don't get errors for invalid pokemon names
         const formattedEditName = editName.toLowerCase();
-        // checks if the name entered is a valid pokemon name
-        if (!pokemonNames.map(name => name.toLowerCase()).includes(formattedEditName)) {
+        if (!pokemonInfo.map(pokemon => pokemon.name.toLowerCase()).includes(formattedEditName)) {
             alert('Please enter a valid Pokémon name.');
             return;
         }
@@ -115,8 +115,10 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                     <>
                         <input className='pokemon-input rc-400' list='pokemon-names' type='text' value={editName} onChange={e => setEditName(e.target.value)} />
                         <datalist id='pokemon-names'>
-                            {pokemonNames.map((name, index) => (
-                                <option key={index} value={name}>{name}</option>
+                            {pokemonInfo.map((pokemon, index) => (
+                                <option key={index} value={pokemon.name}>
+                                    {pokemon.name}
+                                </option>
                             ))}
                         </datalist>
                     </>
