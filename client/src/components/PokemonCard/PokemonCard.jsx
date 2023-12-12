@@ -57,6 +57,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
 
     const [pokemonInfo, setPokemonInfo] = useState([]);
     const [editAbilities, setEditAbilities] = useState([]);
+    const [editTypes, setEditTypes] = useState([]);
 
 
     useEffect(() => {
@@ -75,6 +76,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                         setEditMoves(details.moves);
                         setEditStats(details.stats);
                         setEditAbilities(details.abilities);
+                        setEditTypes(details.types);
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -103,6 +105,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
             return newMoves;
         });
     };
+
 
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
@@ -292,7 +295,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                             </Row>
                         </Col>
                         <Col lg={4}>
-                        <img className='poke-icon' src={editSprite} alt={name} />
+                            <img className='poke-icon' src={editSprite} alt={name} />
                         </Col>
                     </Row>
 
@@ -325,7 +328,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                         </Col>
 
                         <Col lg={6} sm={6} className='types d-flex flex-column'>
-                            {types.slice(0, 2).map((type, index) => {
+                            {editTypes.slice(0, 2).map((type, index) => {
                                 const icon = typesIcons[type.toLowerCase()];
                                 return (
                                     <img className='type-icon' key={index} src={icon} alt={type} />

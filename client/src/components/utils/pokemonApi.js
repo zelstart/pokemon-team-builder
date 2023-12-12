@@ -30,8 +30,9 @@ export async function getPokemonDetails(name) {
         let pokemonAbilities = pokemon.abilities.map(ability => ability.ability.name);
         let pokemonMoves = pokemon.moves.map(move => move.move.name);
         let pokemonStats = pokemon.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat}));
+        let pokemonTypes = pokemon.types.map(type => type.type.name);
 
-        return {sprite: pokemonSprite, abilities: pokemonAbilities, moves: pokemonMoves, stats: pokemonStats};
+        return {sprite: pokemonSprite, abilities: pokemonAbilities, moves: pokemonMoves, stats: pokemonStats, types: pokemonTypes};
     } catch (error) {
         console.error(error);
     }
