@@ -258,38 +258,38 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                             <p className='rc-400 rc-400-bold'>moveset</p>
                         </Col>
                         <Col lg={8} md={8} sm={8}>
-                        <Row>
-    {[...Array(2)].map((_, index) => (
-        <Col lg={6} md={6} sm={6} key={index}>
-            {isEditMode ? (
-                <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
-                    <option value="">--select move--</option>
-                    {editMoves.map((move, moveIndex) => (
-                        <option key={moveIndex} value={move}>{move}</option>
-                    ))}
-                </select>
-            ) : (
-                <p className='rc-400'>{moves[index] || '--'}</p>
-            )}
-        </Col>
-    ))}
-</Row>
-<Row>
-    {[...Array(2)].map((_, index) => (
-        <Col lg={6} md={6} sm={6} key={index + 2}>
-            {isEditMode ? (
-                <select className='pokemon-input rc-400' value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)}>
-                    <option value="">--select move--</option>
-                    {editMoves.map((move, moveIndex) => (
-                        <option key={moveIndex} value={move}>{move}</option>
-                    ))}
-                </select>
-            ) : (
-                <p className='rc-400'>{moves[index + 2] || '--'}</p>
-            )}
-        </Col>
-    ))}
-</Row>
+                            <Row>
+                                {[...Array(2)].map((_, index) => (
+                                    <Col lg={6} md={6} sm={6} key={index}>
+                                        {isEditMode ? (
+                                            <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
+                                                <option value="">--select move--</option>
+                                                {editMoves.map((move, moveIndex) => (
+                                                    <option key={moveIndex} value={move}>{move}</option>
+                                                ))}
+                                            </select>
+                                        ) : (
+                                            <p className='rc-400'>{moves[index] || '--'}</p>
+                                        )}
+                                    </Col>
+                                ))}
+                            </Row>
+                            <Row>
+                                {[...Array(2)].map((_, index) => (
+                                    <Col lg={6} md={6} sm={6} key={index + 2}>
+                                        {isEditMode ? (
+                                            <select className='pokemon-input rc-400' value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)}>
+                                                <option value="">--select move--</option>
+                                                {editMoves.map((move, moveIndex) => (
+                                                    <option key={moveIndex} value={move}>{move}</option>
+                                                ))}
+                                            </select>
+                                        ) : (
+                                            <p className='rc-400'>{moves[index + 2] || '--'}</p>
+                                        )}
+                                    </Col>
+                                ))}
+                            </Row>
                         </Col>
                         <Col lg={4}>
                             <img className='poke-icon' src={sprite} alt={name} />
