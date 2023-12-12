@@ -292,7 +292,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                             </Row>
                         </Col>
                         <Col lg={4}>
-                            <img className='poke-icon' src={sprite} alt={name} />
+                        <img className='poke-icon' src={editSprite} alt={name} />
                         </Col>
                     </Row>
 
