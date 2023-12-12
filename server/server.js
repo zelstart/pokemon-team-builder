@@ -20,8 +20,7 @@ const server = new ApolloServer({
   }
 });
 
-const startApolloServer = async () => {
-  await server.start();
+server.start().then(() => {
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -34,17 +33,14 @@ const startApolloServer = async () => {
     
     // add a wildcard route to serve up the client's index.html file
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
   }
 
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
     });
   });
-};
-
-// start Apollo server
-startApolloServer();
+});
