@@ -63,6 +63,19 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
             .catch(error => console.error('Error:', error));
     }, []);
 
+    useEffect(() => {
+        if (editName) {
+            getPokemonDetails(editName)
+                .then(details => {
+                    console.log(details);
+                    setEditSprite(details.sprite);
+                    setEditMoves(details.moves);
+                    setEditStats(details.stats);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }, [editName]);
+
     // This useEffect hook will run whenever the editName state changes
     useEffect(() => {
         if (!isEditMode) {
