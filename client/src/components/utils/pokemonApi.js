@@ -1,6 +1,6 @@
 
 // API CALL TO GET LIST OF POKEMON NAMES 
-export function getPokemonInfo() {
+export async function fetchPokemonNames() {
     return fetch('https://pokeapi.co/api/v2/pokemon?limit=1118')
         .then(response => {
             if (!response.ok) {
@@ -12,29 +12,23 @@ export function getPokemonInfo() {
 }
 
 // API CALL TO GRAB SINGLE POKEMON JSON OBJECT
-// export async function getPokemonInfo(num) {
-//     let url = "https://pokeapi.co/api/v2/pokemon/" + num.toString();
+export async function getPokemonDetails
 
-//     try {
-//         const response = await fetch(url);
 
-//         const pokemon = await response.json();
-//         const speciesResponse = await fetch(pokemon.species.url);
-//         const speciesData = await speciesResponse.json();
+(name) {
+    let url = "https://pokeapi.co/api/v2/pokemon/" + name;
 
-//         let pokemonName = pokemon.name;
-//         let pokemonType = pokemon.types.map(type => type.type.name);
-//         let pokemonImg = pokemon.sprites.front_default; // THIS CAN BE FEMALE, SHINY ETC..... 
+    try {
+        const response = await fetch(url);
+        const pokemon = await response.json();
 
-//         // All this does is find the earliest entry that is english. Needs more testing.
-//         let pokemonDesc = speciesData.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text;
+        let pokemonSprite = pokemon.sprites.front_default;
+        let pokemonAbilities = pokemon.abilities.map(ability => ability.ability.name);
+        let pokemonMoves = pokemon.moves.map(move => move.move.name);
+        let pokemonStats = pokemon.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat}));
 
-//         // This is all the descriptions. It seems only 1-15 in the array are english and they only go up to soulsilver, needs more testing
-//         let allDescs = speciesData.flavor_text_entries;
-
-//         pokedexEntry[num] = {"name" : pokemonName, "img" : pokemonImg, "types" : pokemonType, "desc" : pokemonDesc};
-
-//     } catch (error) {
-//         console.error('Error fetching Pokemon:', error);
-//     }
-// }
+        return {sprite: pokemonSprite, abilities: pokemonAbilities, moves: pokemonMoves, stats: pokemonStats};
+    } catch (error) {
+        console.error(error);
+    }
+}

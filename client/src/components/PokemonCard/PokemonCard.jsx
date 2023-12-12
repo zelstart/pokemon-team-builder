@@ -10,7 +10,7 @@ import SpritePlaceholder from '/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
-import { getPokemonInfo } from '../utils/pokemonApi.js';
+import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonApi.js';
 
 // ivs and evs are buggy.
 
@@ -58,7 +58,7 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     const [pokemonInfo, setPokemonInfo] = useState([]);
 
     useEffect(() => {
-        getPokemonInfo()
+        fetchPokemonNames()
             .then(pokemonInfo => setPokemonInfo(pokemonInfo))
             .catch(error => console.error('Error:', error));
     }, []);
