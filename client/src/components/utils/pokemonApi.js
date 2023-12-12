@@ -12,10 +12,7 @@ export async function fetchPokemonNames() {
 }
 
 // API CALL TO GRAB SINGLE POKEMON JSON OBJECT
-export async function getPokemonDetails
-
-
-(name) {
+export async function getPokemonDetails(name) {
     let url = "https://pokeapi.co/api/v2/pokemon/" + name;
 
     try {
