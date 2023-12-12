@@ -9,6 +9,7 @@ import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import SpritePlaceholder from '../../assets/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
+
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
 
 // this is just the html so far!! need to actually make it dynamic with props and such
@@ -58,8 +59,8 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
     const [editIVs, setEditIVs] = useState(ivs);
     const [editEVs, setEditEVs] = useState(evs);
     const [pokemonNames, setPokemonNames] = useState([]);
-
-    // API CALL TO GET LIST OF POKEMON NAMES 
+    
+    // This useEffect fetches a list of Pokemon names from the PokeAPI when the component mounts.
     useEffect(() => {
         fetch('https://pokeapi.co/api/v2/pokemon?limit=1118')
             .then(response => response.json())
@@ -72,6 +73,25 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
             setEditName(name);
         }
     }, [name, isEditMode]);
+
+    // THIS IS A WORK IN PROGRESS
+    // This useEffect will fetch detailed information about the selected Pokemon
+    useEffect(() => {
+        if (isEditMode && editName) {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${editName.toLowerCase()}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    // Update state with the fetched data
+                    setEditSprite(data.sprites.front_default);
+                    setEditMoves(data.moves.map(move => move.move.name));
+                    // ... update other fields as needed
+                    
+                })
+                .catch(error => console.error('Error fetching Pokemon data:', error));
+        }
+    }, [isEditMode, editName]);
+
 
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
