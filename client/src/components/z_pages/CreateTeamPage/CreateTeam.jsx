@@ -3,8 +3,25 @@ import PokemonCard from '../../PokemonCard/PokemonCard.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 import './CreateTeam.css';
 
+import Auth from '../../utils/auth';
+
+import { useMutation } from '@apollo/client';
+
+import { CREATE_TEAM } from '../../utils/mutations';
+
 const CreateTeam = () => {
+
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    const [ maker , {error}] = useMutation(CREATE_TEAM);
+
     const [teamName, setTeamName] = useState('');
+
+    console.log(token)
+
+    if (!token) {
+        return false;
+    }
 
     // Initial state for a team member
     const initialState = {
@@ -54,10 +71,23 @@ const CreateTeam = () => {
         }
     };
 
-    const handleSaveTeam = () => {
+    const handleSaveTeam = async () => {
         // code to save the team to the user's account
         // for right now just a console log :p
-        console.log('Team saved:', teamName, teamMembers);
+        
+        try {
+
+            const responseTeam = await maker({variables : {name : teamName}});
+
+            console.log("response : " , responseTeam)
+
+
+            } catch (err) {
+
+            console.error(err);
+
+        }
+
     };
 
     return (
