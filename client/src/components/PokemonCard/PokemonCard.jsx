@@ -67,10 +67,12 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
         if (editName) {
             getPokemonDetails(editName)
                 .then(details => {
-                    console.log(details);
-                    setEditSprite(details.sprite);
-                    setEditMoves(details.moves);
-                    setEditStats(details.stats);
+                    if (details) {
+                        console.log(details);
+                        setEditSprite(details.sprite);
+                        setEditMoves(details.moves);
+                        setEditStats(details.stats);
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         }
@@ -251,7 +253,9 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                                         {isEditMode ? (
                                             <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
                                                 <option value="">--select move--</option>
-                                                {/* will populate with data from api fetch */}
+                                                {editMoves.map((move, moveIndex) => (
+                                                    <option key={moveIndex} value={move}>{move}</option>
+                                                ))}
                                             </select>
                                         ) : (
                                             <p className='rc-400'>{moves[index] || '--'}</p>
@@ -265,10 +269,12 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                                         {isEditMode ? (
                                             <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
                                                 <option value="">--select move--</option>
-                                                {/* will populate with data from api fetch */}
+                                                {editMoves.map((move, moveIndex) => (
+                                                    <option key={moveIndex} value={move}>{move}</option>
+                                                ))}
                                             </select>
                                         ) : (
-                                            <p className='rc-400'>{moves[index + 2] || '--'}</p>
+                                            <p className='rc-400'>{moves[index] || '--'}</p>
                                         )}
                                     </Col>
                                 ))}

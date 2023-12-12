@@ -13,10 +13,17 @@ export async function fetchPokemonNames() {
 
 // API CALL TO GRAB SINGLE POKEMON JSON OBJECT
 export async function getPokemonDetails(name) {
-    let url = "https://pokeapi.co/api/v2/pokemon/" + name;
+    let nameLc = name.toLowerCase();
+    let url = "https://pokeapi.co/api/v2/pokemon/" + nameLc;
 
     try {
         const response = await fetch(url);
+
+        if (!response.ok) {
+            console.error(`Error fetching Pokemon details for ${name}: ${response.statusText}`);
+            return null; // or throw an error, or return a default value
+        }
+
         const pokemon = await response.json();
 
         let pokemonSprite = pokemon.sprites.front_default;
