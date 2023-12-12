@@ -4,14 +4,11 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "server": "node server/server.js",
     "start": "node server/server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "build": "npm --prefix client run build",
-    "dev": "npm --prefix client run dev",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "render-build": "npm install && npm run build",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "postinstall": "cd client && npm install"
   },
   "dependencies": {
