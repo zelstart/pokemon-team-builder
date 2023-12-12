@@ -77,6 +77,10 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                         setEditStats(details.stats);
                         setEditAbilities(details.abilities);
                         setEditTypes(details.types);
+
+                        if (details.abilities.length > 0) {
+                            setEditAbility(details.abilities[0]);
+                        }
                     }
                 })
                 .catch(error => console.error('Error:', error));
