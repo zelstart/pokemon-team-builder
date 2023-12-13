@@ -6,7 +6,7 @@ import App from './App.jsx';
 // uncomment these as components/pages are created
 import Home from './components/z_pages/Home/Home.jsx';
 import CreateTeam from './components/z_pages/CreateTeamPage/CreateTeam.jsx';
-import MyTeamView from './components/z_pages/MyTeamView/MyTeamView.jsx';
+import Me from './components/z_pages/Me/Me.jsx';
 // import Me from './components/z_pages/Me.jsx';
 // import Profile from './components/z_pages/Profile.jsx';
 import NotFound from './components/z_pages/NotFound/NotFound.jsx';
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/me',
-        element: <MyTeamView />
+        element: <Me />
       }, 
       // {
       //   path: '/profile/:id',

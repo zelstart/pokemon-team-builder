@@ -19,6 +19,11 @@ const resolvers = {
     team: async (parent, { teamId }) => {
       return Teams.findOne({ _id: teamId });
     },
+    recentTeams: async (parent, args, context) => {
+      // Fetch the 12 most recent teams from the database
+      const teams = await Teams.find().sort({ _id: -1 }).limit(12);
+      return teams;
+    },
   },
   Mutation: {
     addUser: async (parent, { username, password }) => {

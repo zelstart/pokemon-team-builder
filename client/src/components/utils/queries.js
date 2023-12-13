@@ -1,5 +1,47 @@
 import { gql } from '@apollo/client';
 
+export const GET_USER_TEAMS = gql`
+  query GetUserTeams {
+    userTeams {
+      _id
+      name
+      pokemon {
+        name
+        sprite
+        move_1
+        move_2
+        move_3
+        move_4
+        ability
+        nature
+        level
+      }
+    }
+  }
+`;
+
+export const GET_RECENT_TEAMS = gql`
+  query GetRecentTeams {
+    recentTeams {
+      _id
+      name
+      pokemon {
+        name
+        sprite
+        move_1
+        move_2
+        move_3
+        move_4
+        ability
+        nature
+        level
+      }
+    }
+  }
+`;
+
+
+
 export const QUERY_ME = gql`
   query me {
     me {

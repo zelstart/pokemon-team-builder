@@ -1,39 +1,34 @@
 import { React, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TeamCard from '../../TeamCard/TeamCard.jsx';
+import { useQuery } from '@apollo/client';
+import { GET_RECENT_TEAMS } from '../../utils/queries';
 
 const Home = () => {
+    const { loading, error, data } = useQuery(GET_RECENT_TEAMS);
 
-    //placeholder data for team card
-    const teamData = {
-        teamName: "Team Name Here",
-        // rating: 4.5,
-        pokemon: [
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-            { name: "Venusaur", icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" },
-        ],
-        user: "User1",
-        creator: "Creator1"
-    };
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
 
     return (
         <Container className='mt-2'>
             <Row className='mx-5 mt-5'>
                 <Col lg={12}>
-                    <h2>recently created teams</h2>
+                    <h2>Recent Teams</h2>
                 </Col>
             </Row>
 
-{/* Will turn this into a map later */}
             <Row className='mx-5'>
-                    <TeamCard {...teamData} />
+                {data.recentTeams.map((team) => (
+                    <TeamCard
+                        key={team._id}
+                        teamName={team.name}
+                        pokemon={team.pokemon.map(p => ({ name: p.name, icon: p.sprite }))}
+                    />
+                ))}
             </Row>
         </Container>
-    )
-}
+    );
+};
 
 export default Home;

@@ -50,6 +50,7 @@ const typeDefs = `
     teams(username: String): [Teams]
     team(teamId: ID!): Teams
     me: User
+    recentTeams: [Teams]
   }
 
 
