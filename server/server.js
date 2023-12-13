@@ -14,9 +14,9 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    const token = req.headers.authorization || '';
-    console.log("Token: ", token);
-    return { token };
+    // Use authMiddleware to authenticate user and attach user data to req.user
+    const authUser = authMiddleware({ req });
+    return { user: authUser.user };
   },
   cors: {
     origin: '*', // Allow all origins
