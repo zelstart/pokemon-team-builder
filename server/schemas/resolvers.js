@@ -49,7 +49,7 @@ const resolvers = {
         const team = await Teams.create({
           userCreator: context.user.username,
           name: teamName,
-          pokemon: pokemon,
+          pokemon: pokemon, 
         });
     
         await User.findOneAndUpdate(

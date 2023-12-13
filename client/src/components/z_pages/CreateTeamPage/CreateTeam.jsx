@@ -77,6 +77,9 @@ const CreateTeam = () => {
                 nature: member.nature,
                 level: member.level,
             }));
+
+            console.log('name:', teamName);
+            console.log('pokemon:', pokemonData);
             
             const responseTeam = await maker({ variables: { name: teamName, pokemon: pokemonData } });
             console.log("response : ", responseTeam);

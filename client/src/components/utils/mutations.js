@@ -25,32 +25,21 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_TEAM = gql`
-  mutation createTeam($name: String!) {
-    createTeam(name: $name) {
+  mutation createTeam($name: String!, $pokemon: [PokemonInput!]!) {
+    createTeam(name: $name, pokemon: $pokemon) {
       _id
       name
       userCreator
       pokemon {
-        level
-        pokeDexNo
+        name
+        sprite
         move_1
         move_2
         move_3
         move_4
         ability
-        item
-        hp_ev
-        attack_ev
-        special_attack_ev
-        defense_ev
-        special_defense_ev
-        speed_ev
-        hp_iv
-        attack_iv
-        special_attack_iv
-        defense_iv
-        special_defense_iv
-        speed_iv
+        nature
+        level
       }
     }
   }
