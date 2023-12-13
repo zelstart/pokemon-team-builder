@@ -15,29 +15,16 @@ const typeDefs = `
 
   type Pokemon {
     _id: ID
-    pokeDexNo: Int
     name: String
-    level: Int
+    level: String
     move_1: String
     move_2: String
     move_3: String
     move_4: String
     ability: String
-    item: String
+    types: [String]
     nature: String
     sprite: String
-    hp_ev: Int
-    attack_ev: Int
-    special_attack_ev: Int
-    defense_ev: Int
-    special_defense_ev: Int
-    speed_ev: Int
-    hp_iv: Int
-    attack_iv: Int
-    special_attack_iv: Int
-    defense_iv: Int
-    special_defense_iv: Int
-    speed_iv: Int
   }
 
   type Auth {
@@ -64,7 +51,7 @@ const typeDefs = `
     move_4: String!
     ability: String!
     nature: String!
-    level: Int!
+    level: String!
   }
 
   type Mutation {
@@ -75,7 +62,7 @@ const typeDefs = `
     removeTeam(teamId: ID!): Teams
     addPokemon(teamId: ID!, pokeDexNo: Int!): Teams
     removePokemon(teamId: ID!, pokeId: ID!): Teams
-    updatePokemon(teamId: ID!, pokeId: ID!, level: Int!, move_1: String!, move_2: String!, move_3: String!, move_4: String!, ability: String!, item: String!, hp_ev: Int!, attack_ev: Int!, special_attack_ev: Int!, defense_ev: Int!, special_defense_ev: Int!, speed_ev: Int!, hp_iv: Int!, attack_iv: Int!, special_attack_iv: Int!, defense_iv: Int!, special_defense_iv: Int!, speed_iv: Int!): Teams
+    updatePokemon(teamId: ID!, pokeId: ID!, level: String!, move_1: String!, move_2: String!, move_3: String!, move_4: String!, ability: String!, item: String!, hp_ev: Int!, attack_ev: Int!, special_attack_ev: Int!, defense_ev: Int!, special_defense_ev: Int!, speed_ev: Int!, hp_iv: Int!, attack_iv: Int!, special_attack_iv: Int!, defense_iv: Int!, special_defense_iv: Int!, speed_iv: Int!): Teams
   }
 `;
 

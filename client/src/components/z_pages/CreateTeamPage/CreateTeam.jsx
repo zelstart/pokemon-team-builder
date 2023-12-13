@@ -21,7 +21,7 @@ const CreateTeam = () => {
     // Initial state for a team member
     const initialState = {
         name: 'Pikachu',
-        level: 10,
+        level: '10',
         moves: ['mega-punch', 'pay-day', 'thunder-punch', 'slam'],
         ability: 'static',
         nature: 'hardy',

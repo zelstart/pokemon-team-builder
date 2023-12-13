@@ -10,6 +10,7 @@ import Me from './components/z_pages/Me/Me.jsx';
 // import Me from './components/z_pages/Me.jsx';
 // import Profile from './components/z_pages/Profile.jsx';
 import NotFound from './components/z_pages/NotFound/NotFound.jsx';
+import TeamView from './components/z_pages/TeamView/TeamView.jsx';
 
 
 
@@ -35,10 +36,11 @@ const router = createBrowserRouter([
         path: '/create-team',
         element: <CreateTeam />
       }, 
+      {
+        path: '/team/:id',
+        element: <TeamView />
+      },
       // {
-      //   path: '/team/:id',
-      //   element: <TeamView />
-      // }, {
       //   path: '/test',
       //   element: <Test />
       // }

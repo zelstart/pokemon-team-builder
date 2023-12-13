@@ -15,6 +15,7 @@ export const GET_USER_TEAMS = gql`
         ability
         nature
         level
+        types
       }
     }
   }
@@ -35,6 +36,7 @@ export const GET_RECENT_TEAMS = gql`
         ability
         nature
         level
+        types
       }
     }
   }
@@ -116,32 +118,22 @@ query getSingleTeams {
 `;
 
 export const QUERY_SINGLE_TEAM = gql`
-query getSingleTeam($thoughtId: ID!) {
+query getSingleTeam($teamId: ID!) {
   team(teamId: $teamId) {
     _id
     name
     userCreator
     pokemon {
       level
-      pokeDexNo
+      name
       move_1
       move_2
       move_3
       move_4
       ability
-      item
-      hp_ev
-      attack_ev
-      special_attack_ev
-      defense_ev
-      special_defense_ev
-      speed_ev
-      hp_iv
-      attack_iv
-      special_attack_iv
-      defense_iv
-      special_defense_iv
-      speed_iv
+      sprite
+      types
+      nature
     }
   }
 }

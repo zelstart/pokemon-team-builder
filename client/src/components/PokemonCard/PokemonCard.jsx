@@ -103,7 +103,7 @@ function PokemonCard({
                         console.log(details);
                         setEditSprite(details.sprite);
                         setEditMoves(details.moves);
-                        setEditStats(details.stats);
+                        // setEditStats(details.stats);
                         setEditAbilities(details.abilities);
                         setEditTypes(details.types);
 
@@ -123,13 +123,13 @@ function PokemonCard({
         }
     }, [name, isEditMode]);
 
-    function handleIVChange(statName, value) {
-        setEditIVs(prevIVs => ({ ...prevIVs, [statName]: value }));
-    }
+    // function handleIVChange(statName, value) {
+    //     setEditIVs(prevIVs => ({ ...prevIVs, [statName]: value }));
+    // }
 
-    function handleEVChange(statName, value) {
-        setEditEVs(prevEVs => ({ ...prevEVs, [statName]: value }));
-    }
+    // function handleEVChange(statName, value) {
+    //     setEditEVs(prevEVs => ({ ...prevEVs, [statName]: value }));
+    // }
 
     const handleMoveChange = (index, newMove) => {
         setEditMoves(prevMoves => {
@@ -160,8 +160,6 @@ function PokemonCard({
             nature: editNature,
             ability: editAbility,
             moves: editMoves,
-            ivs: editIVs,
-            evs: editEVs,
             sprite: editSprite,
             types: editTypes,
         };
@@ -310,9 +308,12 @@ function PokemonCard({
                                         {isEditMode ? (
                                             <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
                                                 <option value="">--select move--</option>
-                                                {editMoves.map((move, moveIndex) => (
-                                                    <option key={moveIndex} value={move}>{move}</option>
-                                                ))}
+                                                {editMoves.map((move, moveIndex) => {
+                                                    const formattedMove = move.replace(/-/g, ' ');
+                                                    return (
+                                                        <option key={moveIndex} value={formattedMove}>{formattedMove}</option>
+                                                    );
+                                                })}
                                             </select>
                                         ) : (
                                             <p className='rc-400'>{moves[index] || '--'}</p>
@@ -326,9 +327,12 @@ function PokemonCard({
                                         {isEditMode ? (
                                             <select className='pokemon-input rc-400' value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)}>
                                                 <option value="">--select move--</option>
-                                                {editMoves.map((move, moveIndex) => (
-                                                    <option key={moveIndex} value={move}>{move}</option>
-                                                ))}
+                                                {editMoves.map((move, moveIndex) => {
+                                                    const formattedMove = move.replace(/-/g, ' ');
+                                                    return (
+                                                        <option key={moveIndex} value={formattedMove}>{formattedMove}</option>
+                                                    );
+                                                })}
                                             </select>
                                         ) : (
                                             <p className='rc-400'>{moves[index + 2] || '--'}</p>
@@ -349,9 +353,12 @@ function PokemonCard({
                                 <>
                                     <select className='pokemon-input rc-400' value={editAbility} onChange={e => setEditAbility(e.target.value)}>
                                         <option value="">--select ability--</option>
-                                        {editAbilities.map((ability, abilityIndex) => (
-                                            <option key={abilityIndex} value={ability}>{ability}</option>
-                                        ))}
+                                        {editAbilities.map((ability, abilityIndex) => {
+                                            const formattedAbility = ability.replace(/-/g, ' ');
+                                            return (
+                                                <option key={abilityIndex} value={formattedAbility}>{formattedAbility}</option>
+                                            );
+                                        })}
                                     </select>
 
                                     <select className='rc-400 pokemon-input' value={editNature} onChange={e => setEditNature(e.target.value)}>
