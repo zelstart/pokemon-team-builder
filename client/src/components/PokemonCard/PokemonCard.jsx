@@ -16,19 +16,30 @@ import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonApi.js';
 
 // ivs and evs are buggy.
 
-function PokemonCard({ index, updateTeamMember, onRemove, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
-    
-    const [currentMember, setCurrentMember] = useState({ name, level, ability, stats, ivs, evs, moves, sprite, nature, types });
+function PokemonCard({
+    index,
+    updateTeamMember,
+    onRemove,
+    name,
+    level,
+    ability,
+    moves = [],
+    sprite = SpritePlaceholder,
+    nature,
+    types = ['unknown']
+}) {
+
+    const [currentMember, setCurrentMember] = useState({ name, level, ability, moves, sprite, nature, types });
     const prevMemberRef = useRef();
-    
+
     useEffect(() => {
         prevMemberRef.current = currentMember;
     }, [currentMember]);
-    
+
     const prevMember = prevMemberRef.current;
 
     useEffect(() => {
-        if (!isEqual(prevMember, currentMember)) { 
+        if (!isEqual(prevMember, currentMember)) {
             updateTeamMember(index, currentMember);
         }
     }, [currentMember, index, updateTeamMember]);
@@ -37,29 +48,30 @@ function PokemonCard({ index, updateTeamMember, onRemove, name, level, ability, 
         setIsFlipped(!isFlipped);
     };
 
-    const MAX_HP_STAT_VALUE = 720;
-    const MAX_OTHER_STAT_VALUE = 250;
+    // const MAX_HP_STAT_VALUE = 720;
+    // const MAX_OTHER_STAT_VALUE = 250;
 
-    const pokemonLevel = level;
-    const [baseStats, setBaseStats] = useState(stats);
-    const [ivStats, setIvStats] = useState(ivs);
-    const [evStats, setEvStats] = useState(evs);
+    // const pokemonLevel = level;
+    // const [baseStats, setBaseStats] = useState(stats);
+    // const [ivStats, setIvStats] = useState(ivs);
+    // const [evStats, setEvStats] = useState(evs);
 
-    // create an array of objects for each stat
-    const statsArray = [
-        { name: 'HP', base: baseStats.hp, iv: ivStats.hp, ev: evStats.hp },
-        { name: 'Atk', base: baseStats.atk, iv: ivStats.atk, ev: evStats.atk },
-        { name: 'Def', base: baseStats.def, iv: ivStats.def, ev: evStats.def },
-        { name: 'SpA', base: baseStats.spa, iv: ivStats.spa, ev: evStats.spa },
-        { name: 'SpD', base: baseStats.spd, iv: ivStats.spd, ev: evStats.spd },
-        { name: 'Spe', base: baseStats.spe, iv: ivStats.spe, ev: evStats.spe },
-    ];
+    // // create an array of objects for each stat
+    // const statsArray = [
+    //     { name: 'HP', base: baseStats.hp, iv: ivStats.hp, ev: evStats.hp },
+    //     { name: 'Atk', base: baseStats.atk, iv: ivStats.atk, ev: evStats.atk },
+    //     { name: 'Def', base: baseStats.def, iv: ivStats.def, ev: evStats.def },
+    //     { name: 'SpA', base: baseStats.spa, iv: ivStats.spa, ev: evStats.spa },
+    //     { name: 'SpD', base: baseStats.spd, iv: ivStats.spd, ev: evStats.spd },
+    //     { name: 'Spe', base: baseStats.spe, iv: ivStats.spe, ev: evStats.spe },
+    // ];
 
-    const initialEditIVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
-    const initialEditEVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
 
-    const [editIVs, setEditIVs] = useState(initialEditIVs);
-    const [editEVs, setEditEVs] = useState(initialEditEVs);
+    // const initialEditIVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
+    // const initialEditEVs = statsArray.reduce((acc, stat) => ({ ...acc, [stat.name]: 0 }), {});
+
+    // const [editIVs, setEditIVs] = useState(initialEditIVs);
+    // const [editEVs, setEditEVs] = useState(initialEditEVs);
 
     const [isFlipped, setIsFlipped] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
@@ -69,7 +81,7 @@ function PokemonCard({ index, updateTeamMember, onRemove, name, level, ability, 
     const [editNature, setEditNature] = useState(nature);
     const [editMoves, setEditMoves] = useState(moves);
     const [editSprite, setEditSprite] = useState(sprite);
-    const [editStats, setEditStats] = useState(stats);
+    // const [editStats, setEditStats] = useState(stats);
     const [pokemonNames, setPokemonNames] = useState([]);
 
     const [pokemonInfo, setPokemonInfo] = useState([]);
