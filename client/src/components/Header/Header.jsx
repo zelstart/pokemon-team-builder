@@ -50,7 +50,7 @@ function Header() {
             {/* if user is logged in show logout button */}
             {Auth.loggedIn() ? (
               <a className="nav-link px-3" onClick={Auth.logout}>
-                Logout
+                logout
               </a>
             ) : (
               <a className="nav-link px-3" onClick={() => setShowModal(true)}>
