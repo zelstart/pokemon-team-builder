@@ -18,7 +18,7 @@ export default function ErrorPage() {
 
             <p>{error.statusText}</p>
 
-            <img src={cat} alt="Hang in their cat!" />
+            <img className='border' src={cat} alt="Hang in their cat!" />
 
             <p className="">
 
