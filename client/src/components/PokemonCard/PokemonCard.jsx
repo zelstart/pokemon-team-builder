@@ -12,7 +12,7 @@ import SpritePlaceholder from '/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
 import { calculateTotalStats, calculateColor } from '../utils/pokemonUtils.js';
-import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonApi.js';
+import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonAPI.js';
 
 // ivs and evs are buggy.
 
