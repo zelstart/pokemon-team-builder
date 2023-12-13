@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PokemonCard from '../../PokemonCard/PokemonCard.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 import './CreateTeam.css';
@@ -74,6 +75,8 @@ const CreateTeam = () => {
         setTeamMembers(updatedTeamMembers);
     };
 
+    
+    const navigate = useNavigate();
     const handleSaveTeam = async () => {
         try {
             const pokemonData = teamMembers.map(member => ({
@@ -88,15 +91,15 @@ const CreateTeam = () => {
                 level: member.level,
             }));
 
-            console.log('name:', teamName);
-            console.log('pokemon:', pokemonData);
-            
             const responseTeam = await maker({ variables: { name: teamName, pokemon: pokemonData } });
             console.log("response : ", responseTeam);
-        } catch (err) {
+        
+            // Redirect to the /me route
+            navigate('/me');
+          } catch (err) {
             console.error(err);
-        }
-    };
+          }
+        };
 
     return (
         <Container className='mt-2'>
