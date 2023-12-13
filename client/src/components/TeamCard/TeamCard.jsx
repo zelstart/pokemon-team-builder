@@ -14,14 +14,23 @@ function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator
       <div className='team-card-body'>
         <Row className='top-element justify-content-center'>{teamName}</Row>
         <Row className='middle-element align-content-between'>
-          {pokemon.map((p, index) => (
+          {Array.from({ length: 6 }).map((_, index) => (
             <Row key={index} className='team-row align-content-center'>
-              <Col lg={4} className=''>
-                <img className='team-icon' src={p.icon} alt={p.name} />
-              </Col>
-              <Col className='d-flex align-items-center'>
-                <p className='rc-400-bold p-name m-0 p-0'>{p.name}</p>
-              </Col>
+              {pokemon[index] ? (
+                <>
+                  <Col lg={4} className=''>
+                    <img className='team-icon' src={pokemon[index].icon} alt={pokemon[index].name} />
+                  </Col>
+                  <Col className='d-flex align-items-center'>
+                    <p className='rc-400-bold p-name m-0 p-0'>{pokemon[index].name}</p>
+                  </Col>
+                </>
+              ) : (
+                // Render placeholder if there is no Pokemon at this index
+                <Col className='d-flex align-items-center'>
+                  <p className='rc-400-bold p-name m-0 p-0'></p>
+                </Col>
+              )}
             </Row>
           ))}
         </Row>
@@ -30,5 +39,4 @@ function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator
     </Col>
   );
 }
-
 export default TeamCard;
