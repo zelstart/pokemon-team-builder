@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Row, Col, Form, Button, Container, Modal } from 'react-bootstrap';
+import { isEqual } from 'lodash';
 import '../../style.css';
 import './PokemonCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +16,22 @@ import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonApi.js';
 
 // ivs and evs are buggy.
 
-function PokemonCard({ index, setTeamMembers, onRemove, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
+function PokemonCard({ index, updateTeamMember, onRemove, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
+    
+    const [currentMember, setCurrentMember] = useState({ name, level, ability, stats, ivs, evs, moves, sprite, nature, types });
+    const prevMemberRef = useRef();
+    
+    useEffect(() => {
+        prevMemberRef.current = currentMember;
+    }, [currentMember]);
+    
+    const prevMember = prevMemberRef.current;
+
+    useEffect(() => {
+        if (!isEqual(prevMember, currentMember)) { 
+            updateTeamMember(index, currentMember);
+        }
+    }, [currentMember, index, updateTeamMember]);
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -72,7 +88,7 @@ function PokemonCard({ index, setTeamMembers, onRemove, name, level, ability, st
             getPokemonDetails(editName)
                 .then(details => {
                     if (details) {
-                        // console.log(details);
+                        console.log(details);
                         setEditSprite(details.sprite);
                         setEditMoves(details.moves);
                         setEditStats(details.stats);
@@ -134,9 +150,11 @@ function PokemonCard({ index, setTeamMembers, onRemove, name, level, ability, st
             moves: editMoves,
             ivs: editIVs,
             evs: editEVs,
+            sprite: editSprite,
+            types: editTypes,
         };
 
-        setTeamMembers(updatedPokemon);
+        setCurrentMember(updatedPokemon);
         setIsEditMode(false);
     };
 

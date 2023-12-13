@@ -9,6 +9,7 @@ import { CREATE_TEAM } from '../../utils/mutations';
 
 const CreateTeam = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
+
     const [maker, { error }] = useMutation(CREATE_TEAM);
     const [teamName, setTeamName] = useState('');
 
@@ -59,6 +60,15 @@ const CreateTeam = () => {
         setTeamMembers(prevTeam => prevTeam.map((member, i) => i === index ? newMember : member));
     };
 
+    const updateTeamMember = (index, newMember) => {
+        setTeamMembers(prevMembers => {
+            const newMembers = [...prevMembers];
+            newMembers[index] = newMember;
+            return newMembers;
+        });
+    };
+
+
     const addTeamMember = () => {
         if (teamMembers.length < 6) {
             setTeamMembers([...teamMembers, initialState]);
@@ -70,15 +80,16 @@ const CreateTeam = () => {
             alert('You must have at least one Pokémon on the page.');
             return;
         }
-    
+
         const updatedTeamMembers = teamMembers.filter((_, i) => i !== index);
         setTeamMembers(updatedTeamMembers);
     };
 
-    
+
     const navigate = useNavigate();
     const handleSaveTeam = async () => {
         try {
+            console.log(teamMembers);
             const pokemonData = teamMembers.map(member => ({
                 name: member.name,
                 sprite: member.sprite,
@@ -93,13 +104,13 @@ const CreateTeam = () => {
 
             const responseTeam = await maker({ variables: { name: teamName, pokemon: pokemonData } });
             console.log("response : ", responseTeam);
-        
+
             // Redirect to the /me route
             navigate('/me');
-          } catch (err) {
+        } catch (err) {
             console.error(err);
-          }
-        };
+        }
+    };
 
     return (
         <Container className='mt-2'>
@@ -121,15 +132,16 @@ const CreateTeam = () => {
                 </Col>
             </Row>
             <Row>
-                {teamMembers.map((member, index) => (
-                    <Col lg={4} key={index} className='mb-4'>
-                        <PokemonCard
-      {...member}
-      setTeamMembers={(newMember) => handleSetTeamMember(index, newMember)}
-      onRemove={() => handleRemovePokemon(index)}
-                        />
-                    </Col>
-                ))}
+            {teamMembers.map((member, index) => (
+                <Col lg={4} key={index} className='mb-4'>
+                    <PokemonCard
+                        {...member}
+                        index={index}
+                        updateTeamMember={updateTeamMember}
+                        onRemove={() => handleRemovePokemon(index)}
+                    />
+                </Col>
+            ))}
                 {teamMembers.length < 6 && (
                     <Col lg={4} className='mb-4 d-flex justify-content-center align-items-center'>
                         <button className='mx-1 add-pkmn' onClick={addTeamMember}>add a pokémon</button>

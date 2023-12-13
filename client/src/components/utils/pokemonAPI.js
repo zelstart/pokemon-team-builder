@@ -19,7 +19,7 @@ export async function getPokemonDetails(name) {
         const response = await fetch(url);
 
         if (!response.ok) {
-            console.error(`Error fetching Pokemon details for ${name}: ${response.statusText}`);
+            // console.error(`Error fetching Pokemon details for ${name}: ${response.statusText}`);
             return null; // or throw an error, or return a default value
         }
 
