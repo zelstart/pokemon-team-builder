@@ -121,7 +121,7 @@ export const REMOVE_TEAM = gql`
 `;
 
 export const ADD_POKEMON = gql`
-  mutation addPokemon($teamId: ID!, $pokeDexNo: Number!) {
+  mutation addPokemon($teamId: ID!, $pokeDexNo: Int!) {
     addPokemon(teamId: $teamId, pokeDexNo: $pokeDexNo) {
       _id
       name
@@ -185,7 +185,7 @@ export const REMOVE_POKEMON = gql`
 `;
 
 export const UPDATE_POKEMON = gql`
-  mutation updatePokemon($teamId: ID!, $pokeId: ID!, $level: Number!, $move_1: String!, $move_2: String!, $move_3: String!, $move_4: String!, $ability: String!, $item: String!, $hp_ev: Number!, $attack_ev: Number!, $special_attack_ev: Number!, $defense_ev: Number!, $special_defense_ev: Number!, $speed_ev: Number!, $hp_iv: Number!, $attack_iv: Number!, $special_attack_iv: Number!, $defense_iv: Number!, $special_defense_iv: Number!, $speed_iv: Number!) {
+  mutation updatePokemon($teamId: ID!, $pokeId: ID!, $level: Int!, $move_1: String!, $move_2: String!, $move_3: String!, $move_4: String!, $ability: String!, $item: String!, $hp_ev: Int!, $attack_ev: Int!, $special_attack_ev: Int!, $defense_ev: Int!, $special_defense_ev: Int!, $speed_ev: Int!, $hp_iv: Int!, $attack_iv: Int!, $special_attack_iv: Int!, $defense_iv: Int!, $special_defense_iv: Int!, $speed_iv: Int!) {
     updatePokemon(teamId: $teamId, pokeId: $pokeId, level: $level, move_1: $move_1, move_2: $move_2, move_3: $move_3, move_4: $move_4, ability: $ability, item: $item, hp_ev: $hp_ev, attack_ev: $attack_ev, special_attack_ev: $special_attack_ev, defense_ev: $defense_ev, special_defense_ev: $special_defense_ev, speed_ev: $speed_ev, hp_iv: $hp_iv, attack_iv: $attack_iv, special_attack_iv: $special_attack_iv, defense_iv: $defense_iv, special_defense_iv: $special_defense_iv, speed_iv: $speed_iv) {
       _id
       name
