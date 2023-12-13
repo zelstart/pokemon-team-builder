@@ -44,18 +44,23 @@ const resolvers = {
       return { token, user };
     },
     createTeam: async (parent, {name}, context) => {
+      console.log("outside");
       if (context.user) {
+        console.log("inside the if, for context.user")
         const teamName = name ? name : "";
+        console.log(teamName);
         const team = await Teams.create({
           userCreator: context.user.username,
           name: teamName
         });
+        console.log(team);
 
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { teams: team._id } },
           { new: true, }
         );
+        console.log(user);
 
         return team;
       }
