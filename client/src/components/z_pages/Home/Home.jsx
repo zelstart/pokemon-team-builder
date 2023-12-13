@@ -22,6 +22,7 @@ const Home = () => {
                 {data.recentTeams.map((team) => (
                     <TeamCard
                         key={team._id}
+                        teamId={team._id}
                         teamName={team.name}
                         pokemon={team.pokemon.map(p => ({ name: p.name, icon: p.sprite }))}
                     />

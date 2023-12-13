@@ -45,3 +45,9 @@
   .p-name {
     font-size: 1.1rem;
   }
+
+  .team-name {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+  }

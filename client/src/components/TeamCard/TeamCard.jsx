@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './TeamCard.css';
 
 // these should be the names of the props we'll be using.
@@ -8,11 +9,11 @@ import './TeamCard.css';
 // whether or not the user is logged in, whether or not the user is the creator of the team, and whether or not they've rated this team before.
 // if any of these are true, the rating WILL NOT be updated and the user should be notified
 // that function will probably live in the home page, since that's where the team cards will be rendered.
-function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator }) {
+function TeamCard({ teamName, teamId, rating, pokemon, handleRatingUpdate, user, creator }) {
   return (
     <Col lg={3} className='team-card mx-2 mt-2'>
       <div className='team-card-body'>
-        <Row className='top-element justify-content-center'>{teamName}</Row>
+        <Row className='top-element justify-content-center text-center'><Link className='team-name' to={`/team/${teamId}`}>{teamName}</Link></Row>
         <Row className='middle-element align-content-between'>
           {Array.from({ length: 6 }).map((_, index) => (
             <Row key={index} className='team-row align-content-center'>
