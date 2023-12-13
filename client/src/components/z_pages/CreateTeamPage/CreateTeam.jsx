@@ -8,13 +8,13 @@ import { CREATE_TEAM } from '../../utils/mutations';
 
 const CreateTeam = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    const [ maker , {error}] = useMutation(CREATE_TEAM);
+    const [maker, { error }] = useMutation(CREATE_TEAM);
     const [teamName, setTeamName] = useState('');
 
     if (!token) {
         return false;
     }
-    
+
 
     // Initial state for a team member
     const initialState = {
@@ -65,12 +65,22 @@ const CreateTeam = () => {
     };
 
     const handleSaveTeam = async () => {
-        // code to save the team to the user's account
-        // for right now just a console log :p
         try {
-            const responseTeam = await maker({variables : {name : teamName}});
-            console.log("response : " , responseTeam)
-            } catch (err) {
+            const pokemonData = teamMembers.map(member => ({
+                name: member.name,
+                sprite: member.sprite,
+                move_1: member.moves[0],
+                move_2: member.moves[1],
+                move_3: member.moves[2],
+                move_4: member.moves[3],
+                ability: member.ability,
+                nature: member.nature,
+                level: member.level,
+            }));
+            
+            const responseTeam = await maker({ variables: { name: teamName, pokemon: pokemonData } });
+            console.log("response : ", responseTeam);
+        } catch (err) {
             console.error(err);
         }
     };
