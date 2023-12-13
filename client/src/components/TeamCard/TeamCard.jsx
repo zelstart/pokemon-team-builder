@@ -10,7 +10,7 @@ import './TeamCard.css';
 // that function will probably live in the home page, since that's where the team cards will be rendered.
 function TeamCard({ teamName, rating, pokemon, handleRatingUpdate, user, creator }) {
   return (
-    <Col lg={3} className='team-card'>
+    <Col lg={3} className='team-card mx-2 mt-2'>
       <div className='team-card-body'>
         <Row className='top-element justify-content-center'>{teamName}</Row>
         <Row className='middle-element align-content-between'>
