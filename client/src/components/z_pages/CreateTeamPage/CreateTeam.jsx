@@ -64,6 +64,16 @@ const CreateTeam = () => {
         }
     };
 
+    const handleRemovePokemon = (index) => {
+        if (teamMembers.length <= 1) {
+            alert('You must have at least one Pokémon on the page.');
+            return;
+        }
+    
+        const updatedTeamMembers = teamMembers.filter((_, i) => i !== index);
+        setTeamMembers(updatedTeamMembers);
+    };
+
     const handleSaveTeam = async () => {
         try {
             const pokemonData = teamMembers.map(member => ({
@@ -111,8 +121,9 @@ const CreateTeam = () => {
                 {teamMembers.map((member, index) => (
                     <Col lg={4} key={index} className='mb-4'>
                         <PokemonCard
-                            {...member}
-                            setTeamMembers={(newMember) => handleSetTeamMember(index, newMember)}
+      {...member}
+      setTeamMembers={(newMember) => handleSetTeamMember(index, newMember)}
+      onRemove={() => handleRemovePokemon(index)}
                         />
                     </Col>
                 ))}

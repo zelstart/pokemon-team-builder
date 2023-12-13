@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import SpritePlaceholder from '/images/placeholders/sprite-placeholder.png';
 import typesIcons from '../../assets/data/types';
 import natures from '../../assets/data/natures';
@@ -14,7 +15,7 @@ import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonApi.js';
 
 // ivs and evs are buggy.
 
-function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
+function PokemonCard({ index, setTeamMembers, onRemove, name, level, ability, stats = {}, ivs, evs, moves = [], sprite = SpritePlaceholder, nature, types = ['unknown'] }) {
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -179,8 +180,16 @@ function PokemonCard({ setTeamMembers, name, level, ability, stats = {}, ivs, ev
                 />
             </Col>
 
-            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+            {/* removing stats for now */}
+            {/* <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
                 <div className='stat-button' onClick={handleFlip}> <FontAwesomeIcon icon={faChevronRight} className='stats-chevron' /></div>
+            </Col> */}
+
+            {/* delete button */}
+            <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
+                <div className='delete-button' onClick={() => onRemove(index)}>
+                    <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
+                </div>
             </Col>
 
         </Row>
