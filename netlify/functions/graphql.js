@@ -20,15 +20,9 @@ async function connectToDatabase() {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-exports.handler = async (event, context) => {
-    try {
-        await connectToDatabase();
-        return server.createHandler()(event, context);
-    } catch (error) {
-        console.error('Error handling request:', error);
-        return {
-            statusCode: 500,
-            body: 'Internal Server Error',
-        };
-    }
-};
+exports.handler = server.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+  });
