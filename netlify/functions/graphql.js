@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server-lambda');
 const mongoose = require('mongoose');
-const { typeDefs, resolvers } = require('../../server/schemas');
+const typeDefs = require('../../server/schemas/typeDefs');
+const resolvers = require('../../server/schemas/resolvers');
 
 let cachedDb = null;
 
