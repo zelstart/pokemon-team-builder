@@ -1,35 +1,19 @@
-const { ApolloServer, gql } = require('apollo-server-lambda');
-const mongoose = require('mongoose');
-const typeDefs = require('../../server/schemas/typeDefs');
-const resolvers = require('../../server/schemas/resolvers');
+const mongodb = require('mongodb');
 
+let uri = process.env.ATLAS_URI;
 let cachedDb = null;
 
 async function connectToDatabase() {
-    if (cachedDb) {
-        console.log('Using cached database instance');
-        return Promise.resolve(cachedDb);
-    }
-
-    return mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(db => {
-            cachedDb = db;
-            return cachedDb;
-        });
+  if (cachedDb) {
+    return cachedDb;
+  }
+  const client = await mongodb.MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  cachedDb = client.db('pokemon-team-builder');
+  return cachedDb;
 }
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: async () => {
-      await connectToDatabase();
-      return {};
-    },
-  });
-  
-  exports.handler = server.createHandler({
-    cors: {
-      origin: '*',
-      credentials: true,
-    },
-  });
+exports.handler = async (event, context) => {
+  const db = await connectToDatabase();
+  const collection = db.collection('pokemon-teams');
+
+};

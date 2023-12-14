@@ -1,2 +1,8 @@
 [build]
   functions = "netlify/functions"
+
+  [[redirects]]
+  from = "/.netlify/functions/graphql/*"
+  to = "/.netlify/functions/graphql/:splat"
+  status = 200
+  force = true
