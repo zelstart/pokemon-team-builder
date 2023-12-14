@@ -18,9 +18,16 @@ async function connectToDatabase() {
         });
 }
 
-const server = new ApolloServer({ typeDefs, resolvers });
-
-exports.handler = server.createHandler({
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async () => {
+      await connectToDatabase();
+      return {};
+    },
+  });
+  
+  exports.handler = server.createHandler({
     cors: {
       origin: '*',
       credentials: true,
