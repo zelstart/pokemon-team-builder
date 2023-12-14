@@ -1,0 +1,53 @@
+.team-card {
+    width: 210px;
+    border: none;
+  }
+  
+  .top-element {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    color: white;
+    cursor: default;
+    background-color: var(--red);
+    height: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 10px solid var(--red);
+  }
+  
+  .middle-element {
+    background-color: transparent;
+    height: 320px;
+    border: 10px solid var(--red);
+  }
+  
+  .bottom-element {
+    background-color: var(--red);
+    height: 25px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 10px solid var(--red);
+  }
+
+  .team-row {
+    font-family: 'Roboto', sans-serif;
+    max-height: 40px;
+    padding: 0;
+    margin: 5px 0px;
+    width: 100%;
+    height: auto;
+  }
+
+  .team-icon {
+    max-height: 50px;
+  }
+
+  .p-name {
+    font-size: 1.1rem;
+  }
+
+  .team-name {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+  }

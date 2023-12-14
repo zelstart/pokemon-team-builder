@@ -19,6 +19,11 @@ const resolvers = {
     team: async (parent, { teamId }) => {
       return Teams.findOne({ _id: teamId });
     },
+    recentTeams: async (parent, args, context) => {
+      // Fetch the 12 most recent teams from the database
+      const teams = await Teams.find().sort({ _id: -1 }).limit(12);
+      return teams;
+    },
   },
   Mutation: {
     addUser: async (parent, { username, password }) => {
@@ -43,20 +48,22 @@ const resolvers = {
 
       return { token, user };
     },
-    createTeam: async (parent, {name}, context) => {
+    createTeam: async (parent, { name, pokemon }, context) => {
       if (context.user) {
         const teamName = name ? name : "";
         const team = await Teams.create({
           userCreator: context.user.username,
-          name: teamName
+          userId: context.user._id,
+          name: teamName,
+          pokemon: pokemon, 
         });
-
+    
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { teams: team._id } },
+          { $addToSet: { savedTeams: team._id } },
           { new: true, }
         );
-
+    
         return team;
       }
       throw AuthenticationError;

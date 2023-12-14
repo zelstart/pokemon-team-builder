@@ -14,7 +14,20 @@ const teamsSchema = new Schema(
       required: true,
       trim: true,
     },
-    pokemon : [pokemonSchema]
+    // pokemon : [pokemonSchema]
+    pokemon: [
+      {
+        name: String,
+        sprite: String,
+        move_1: String,
+        move_2: String,
+        move_3: String,
+        move_4: String,
+        ability: String,
+        nature: String,
+        level: Number,
+      },
+    ],
   },
 );
 
