@@ -30,7 +30,7 @@ const TeamView = () => {
             <h1>{data.team.name}</h1>
             <Row>
                 {data.team.pokemon.map((pokemon, index) => {
-                    const { move_1, move_2, move_3, move_4, nature, level, types, sprite, ability } = pokemon;
+                    const { move_1, move_2, move_3, move_4, nature, level, types, sprite, ability, name } = pokemon;
                     const moves = [move_1, move_2, move_3, move_4];
                     console.log(data);
                     return (
@@ -43,6 +43,8 @@ const TeamView = () => {
                                 types={types}
                                 sprite={sprite}
                                 ability={ability}
+                                name={name}
+                                isViewing={true}
                             />
                         </Col>
                     );

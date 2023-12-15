@@ -18,6 +18,7 @@ import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonAPI.js';
 
 function PokemonCard({
     index,
+    isViewing,
     updateTeamMember,
     onRemove,
     name,
@@ -201,11 +202,13 @@ function PokemonCard({
             </Col>
 
             <Col lg={1} className='d-flex align-items-center justify-content-start'>
-                <FontAwesomeIcon
-                    icon={isEditMode ? faFloppyDisk : faPenToSquare}
-                    onClick={isEditMode ? handleSaveClick : handleEditClick}
-                    className='edit-save'
-                />
+                {!isViewing && (
+                    <FontAwesomeIcon
+                        icon={isEditMode ? faFloppyDisk : faPenToSquare}
+                        onClick={isEditMode ? handleSaveClick : handleEditClick}
+                        className='edit-save'
+                    />
+                )}
             </Col>
 
             {/* removing stats for now */}
@@ -215,9 +218,11 @@ function PokemonCard({
 
             {/* delete button */}
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                <div className='delete-button' onClick={() => onRemove(index)}>
-                    <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
-                </div>
+                {!isViewing && (
+                    <div className='delete-button' onClick={() => onRemove(index)}>
+                        <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
+                    </div>
+                )}
             </Col>
 
         </Row>
@@ -255,7 +260,7 @@ function PokemonCard({
         );
     }
     return (
-        <div className='poke-card m-1'>
+        <div className={isViewing ? 'poke-card-no-gradient' : 'poke-card'}>
             {isFlipped ? (
                 <Row className='justify-content-center no-select'>
                     {cardTop}

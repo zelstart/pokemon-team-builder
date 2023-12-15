@@ -139,7 +139,8 @@ const CreateTeam = () => {
                         index={index}
                         updateTeamMember={updateTeamMember}
                         onRemove={() => handleRemovePokemon(index)}
-                    />
+                        isViewing={false}
+                        />
                 </Col>
             ))}
                 {teamMembers.length < 6 && (
