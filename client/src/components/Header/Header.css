@@ -1,0 +1,86 @@
+.nav-link {
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+}
+
+#links .nav-link:hover {
+    font-size: larger;
+    text-shadow: 1px 1px 8px rgba(70, 70, 70, 0.748);
+}
+
+img {
+    height: 22dvh;
+}
+
+#name {
+    height: 10dvh;
+    background: white;
+}
+
+.icon {
+    background: url("./../../assets/pokeball-pokemon-svgrepo-com.svg");
+    background-size: contain;
+    height: 2dvh;
+    width: 2dvh;
+    display: block;
+    margin-right: 5px;
+}
+
+#title {
+    font-size: 8dvh;
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+#links {
+    margin-top: 20px;
+    background-color: var(--red);
+    height: 5dvh;
+    width: 100dvw;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: .06rem;
+    color: white !important;
+}
+
+
+.modal-style .btn, .modal-style .nav-link.active  {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-style .nav-link {
+    color: var(--red)
+}
+
+.modal-style .nav-link.active:hover {
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.748);
+}
+
+.modal-style .nav-link:hover {
+    text-shadow: 3px 3px 5px rgba(142, 142, 142, 0.281);
+}
+
+.modal-style .btn:hover{
+    box-shadow: 3px 3px 8px rgba(142, 142, 142, 0.281);
+    transform: scale(1.1);
+    transition: ease-in-out 0.3s;
+}
+
+
+@media screen and (max-width: 768px) {
+    #links {
+        font-size: 1rem;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 538px) {
+    #links {
+        font-size: .9rem;
+        height: 40px;
+        padding-right: 2px;
+    }
+}

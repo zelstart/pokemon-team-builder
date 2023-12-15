@@ -18,6 +18,7 @@ import { fetchPokemonNames, getPokemonDetails } from '../utils/pokemonAPI.js';
 
 function PokemonCard({
     index,
+    isViewing,
     updateTeamMember,
     onRemove,
     name,
@@ -200,13 +201,15 @@ function PokemonCard({
                 )}
             </Col>
 
-            <Col lg={1} className='d-flex align-items-center justify-content-start'>
-                <FontAwesomeIcon
-                    icon={isEditMode ? faFloppyDisk : faPenToSquare}
-                    onClick={isEditMode ? handleSaveClick : handleEditClick}
-                    className='edit-save'
-                />
-            </Col>
+            {!isViewing && (
+                <Col lg={1} className='d-flex align-items-center justify-content-start'>
+                    <FontAwesomeIcon
+                        icon={isEditMode ? faFloppyDisk : faPenToSquare}
+                        onClick={isEditMode ? handleSaveClick : handleEditClick}
+                        className='edit-save'
+                    />
+                </Col>
+            )}
 
             {/* removing stats for now */}
             {/* <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
@@ -215,8 +218,10 @@ function PokemonCard({
 
             {/* delete button */}
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                <div className='delete-button' onClick={() => onRemove(index)}>
-                    <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
+                <div className={`delete-button ${isViewing ? 'default-cursor' : ''}`} onClick={() => onRemove(index)}>
+                    {!isViewing && (
+                        <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
+                    )}
                 </div>
             </Col>
 
@@ -255,7 +260,7 @@ function PokemonCard({
         );
     }
     return (
-        <div className='poke-card m-1'>
+        <div className='poke-card'>
             {isFlipped ? (
                 <Row className='justify-content-center no-select'>
                     {cardTop}
@@ -394,4 +399,4 @@ function PokemonCard({
     );
 }
 
-export default PokemonCard;
+export default PokemonCard;    

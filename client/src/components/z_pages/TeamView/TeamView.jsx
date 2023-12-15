@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import PokemonCard from '../../PokemonCard/PokemonCard.jsx';
 import { QUERY_SINGLE_TEAM } from '../../utils/queries';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 const TeamView = () => {
     const { id } = useParams();
@@ -26,15 +26,20 @@ const TeamView = () => {
     if (error) return <p>Error :(</p>;
 
     return (
-        <div className='mx-5 mt-2'>
-            <h1>{data.team.name}</h1>
+        <Container className=''>
+            <Row>
+                <Col> 
+                <h1>{data.team.name}</h1>
+                </Col>
+            </Row>
+
             <Row>
                 {data.team.pokemon.map((pokemon, index) => {
-                    const { move_1, move_2, move_3, move_4, nature, level, types, sprite, ability } = pokemon;
+                    const { move_1, move_2, move_3, move_4, nature, level, types, sprite, ability, name } = pokemon;
                     const moves = [move_1, move_2, move_3, move_4];
                     console.log(data);
                     return (
-                        <Col className='mb-3' sm={4} key={index}>
+                        <Col className='mb-3' lg={4} key={index}>
                             <PokemonCard
                                 updateTeamMember={updateTeamMember}
                                 moves={moves}
@@ -43,12 +48,14 @@ const TeamView = () => {
                                 types={types}
                                 sprite={sprite}
                                 ability={ability}
+                                name={name}
+                                isViewing={true}
                             />
                         </Col>
                     );
                 })}
             </Row>
-        </div>
+        </Container>
     );
             }
 
