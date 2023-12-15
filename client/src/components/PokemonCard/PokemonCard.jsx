@@ -259,6 +259,28 @@ function PokemonCard({
             </Row>
         );
     }
+
+    const MoveSelect = ({ index, isEditMode, editMoves, handleMoveChange, moves }) => {
+        return (
+            <Col lg={6} md={6} sm={6}>
+                {isEditMode ? (
+                    <select className='pokemon-input rc-400' value={editMoves[index] ? editMoves[index].replace(/-/g, ' ') : ''} onChange={e => handleMoveChange(index, e.target.value)}>
+                        <option value="">--select move--</option>
+                        {moves.map((move, moveIndex) => {
+                            const formattedMove = move.replace(/-/g, ' ');
+                            return (
+                                <option key={moveIndex} value={formattedMove}>{formattedMove}</option>
+                            );
+                        })}
+                    </select>
+                ) : (
+                    <p className='rc-400'>{moves[index] || '--'}</p>
+                )}
+            </Col>
+        );
+    };
+
+
     return (
         <div className='poke-card'>
             {isFlipped ? (
@@ -308,42 +330,12 @@ function PokemonCard({
                         </Col>
                         <Col lg={8} md={8} sm={8}>
                             <Row>
-                                {[...Array(2)].map((_, index) => (
-                                    <Col lg={6} md={6} sm={6} key={index}>
-                                        {isEditMode ? (
-                                            <select className='pokemon-input rc-400' value={editMoves[index] || ''} onChange={e => handleMoveChange(index, e.target.value)}>
-                                                <option value="">--select move--</option>
-                                                {editMoves.map((move, moveIndex) => {
-                                                    const formattedMove = move.replace(/-/g, ' ');
-                                                    return (
-                                                        <option key={moveIndex} value={formattedMove}>{formattedMove}</option>
-                                                    );
-                                                })}
-                                            </select>
-                                        ) : (
-                                            <p className='rc-400'>{moves[index] || '--'}</p>
-                                        )}
-                                    </Col>
-                                ))}
+                                <MoveSelect index={0} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                                <MoveSelect index={1} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
                             </Row>
                             <Row>
-                                {[...Array(2)].map((_, index) => (
-                                    <Col lg={6} md={6} sm={6} key={index + 2}>
-                                        {isEditMode ? (
-                                            <select className='pokemon-input rc-400' value={editMoves[index + 2] || ''} onChange={e => handleMoveChange(index + 2, e.target.value)}>
-                                                <option value="">--select move--</option>
-                                                {editMoves.map((move, moveIndex) => {
-                                                    const formattedMove = move.replace(/-/g, ' ');
-                                                    return (
-                                                        <option key={moveIndex} value={formattedMove}>{formattedMove}</option>
-                                                    );
-                                                })}
-                                            </select>
-                                        ) : (
-                                            <p className='rc-400'>{moves[index + 2] || '--'}</p>
-                                        )}
-                                    </Col>
-                                ))}
+                                <MoveSelect index={2} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                                <MoveSelect index={3} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
                             </Row>
                         </Col>
                         <Col lg={4}>
