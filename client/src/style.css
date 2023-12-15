@@ -20,6 +20,7 @@ p {
     margin: 0;
 }
 
+
 /* Roboto Condensed */
 .rc-400 {
     font-family: 'Roboto Condensed', sans-serif;
@@ -51,6 +52,7 @@ h1 {
 h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
+    margin: 0;
 }
 
 
@@ -62,3 +64,22 @@ h3 {
 }
 
 /*  */
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem !important;
+    }
+    h2 {
+        font-size: 2rem !important;
+    }
+}
+
+
+@media screen and (max-width: 538px) {
+    h1 {
+        font-size: 2rem !important;
+    }
+    h2 {
+        font-size: 1.5rem !important;
+    }
+}
