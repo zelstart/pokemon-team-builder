@@ -16,6 +16,10 @@ body {
     overflow-x: hidden;
 }
 
+p {
+    margin: 0;
+}
+
 /* Roboto Condensed */
 .rc-400 {
     font-family: 'Roboto Condensed', sans-serif;
