@@ -16,7 +16,8 @@ A pokémon team building application. Users can sign up, login, and create their
 
 
 ## Installation 
-Clone the repo or fork.
+Clone the repo or fork.  
+To run locally, open in your favorite IDE. In the terminal, run `npm run install`, and then `npm run develop`. 
 
 ## Usage 
 Navigate to the root folder and run npm install. Run npm run dev and navigate to the localhost in your favorite web browser.
