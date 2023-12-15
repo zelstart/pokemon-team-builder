@@ -201,15 +201,15 @@ function PokemonCard({
                 )}
             </Col>
 
-                {!isViewing && (
-            <Col lg={1} className='d-flex align-items-center justify-content-start'>
+            {!isViewing && (
+                <Col lg={1} className='d-flex align-items-center justify-content-start'>
                     <FontAwesomeIcon
                         icon={isEditMode ? faFloppyDisk : faPenToSquare}
                         onClick={isEditMode ? handleSaveClick : handleEditClick}
                         className='edit-save'
                     />
-            </Col>
-                )}
+                </Col>
+            )}
 
             {/* removing stats for now */}
             {/* <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
@@ -218,11 +218,11 @@ function PokemonCard({
 
             {/* delete button */}
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                    <div className='delete-button' onClick={() => onRemove(index)}>
-                {!isViewing && (
+                <div className={`delete-button ${isViewing ? 'default-cursor' : ''}`} onClick={() => onRemove(index)}>
+                    {!isViewing && (
                         <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
                     )}
-                    </div>
+                </div>
             </Col>
 
         </Row>
@@ -260,7 +260,7 @@ function PokemonCard({
         );
     }
     return (
-        <div className={isViewing ? 'poke-card-no-gradient' : 'poke-card'}>
+        <div className='poke-card'>
             {isFlipped ? (
                 <Row className='justify-content-center no-select'>
                     {cardTop}
