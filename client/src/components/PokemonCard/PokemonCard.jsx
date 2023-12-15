@@ -201,15 +201,15 @@ function PokemonCard({
                 )}
             </Col>
 
-            <Col lg={1} className='d-flex align-items-center justify-content-start'>
                 {!isViewing && (
+            <Col lg={1} className='d-flex align-items-center justify-content-start'>
                     <FontAwesomeIcon
                         icon={isEditMode ? faFloppyDisk : faPenToSquare}
                         onClick={isEditMode ? handleSaveClick : handleEditClick}
                         className='edit-save'
                     />
-                )}
             </Col>
+                )}
 
             {/* removing stats for now */}
             {/* <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
@@ -218,11 +218,11 @@ function PokemonCard({
 
             {/* delete button */}
             <Col lg={3} md={3} sm={3} className='d-flex align-items-center'>
-                {!isViewing && (
                     <div className='delete-button' onClick={() => onRemove(index)}>
+                {!isViewing && (
                         <FontAwesomeIcon icon={faTrash} className='stats-chevron' />
+                    )}
                     </div>
-                )}
             </Col>
 
         </Row>
