@@ -280,7 +280,7 @@ function PokemonCard({
             </Col>
         );
     }
-    
+
 
 
     return (
@@ -331,14 +331,14 @@ function PokemonCard({
                             <p className='rc-400 rc-400-bold'>moveset</p>
                         </Col>
                         <Col lg={8} md={8} sm={8}>
-                        <Row>
-    <MoveSelect index={0} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
-    <MoveSelect index={1} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
-</Row>
-<Row>
-    <MoveSelect index={2} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
-    <MoveSelect index={3} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
-</Row>
+                            <Row>
+                                <MoveSelect index={0} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                                <MoveSelect index={1} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                            </Row>
+                            <Row>
+                                <MoveSelect index={2} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                                <MoveSelect index={3} isEditMode={isEditMode} editMoves={editMoves} handleMoveChange={handleMoveChange} moves={moves} />
+                            </Row>
                         </Col>
                         <Col lg={4}>
                             <img className='poke-icon' src={editSprite} alt={name} />
