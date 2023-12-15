@@ -399,28 +399,4 @@ function PokemonCard({
     );
 }
 
-export default PokemonCard;     <>
-                                    <p><span className='rc-400-bold'>ability: </span><span className='rc-400'>{ability}</span></p>
-                                    <p><span className='rc-400-bold'>nature: </span><span className='rc-400'>{nature}</span></p>
-                                </>
-                            )}
-                        </Col>
-
-                        <Col lg={6} sm={6} className='types d-flex flex-column'>
-                            {editTypes.slice(0, 2).map((type, index) => {
-                                const icon = typesIcons[type.toLowerCase()];
-                                return (
-                                    <img className='type-icon' key={index} src={icon} alt={type} />
-                                );
-                            })}
-                        </Col>
-                    </Row>
-
-                </Row>
-            )}
-        </div>
-
-    );
-}
-
-export default PokemonCard;
+export default PokemonCard;    
